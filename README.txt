@@ -14,3 +14,4 @@ Invite - A notification sent from a Band Leader to a Musician with their band in
 Response - A notification that is sent to a Band Leader with an invited musician's decision. If the Musician accepted it included contact details, if the musician declined it is a pre-written message.
 Gig - A single, paid performance by a musician.
 Gig Musician - A musician that expects compensation for playing their instrument.
+Demo Reel - Audio or video of a musician show off their skills
