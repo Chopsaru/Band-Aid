@@ -15,13 +15,16 @@ app.engine('handlebars', handlebars.engine);
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use('/static', express.static('public'));
+app.use('/', express.static('public'));
 
 app.set('view engine', 'handlebars');
 app.set('port', process.argv[2]);
 //app.set('mysql', mysql);
 
 app.use('/home', require('./home.js'));
-app.use('/', express.static('public'));
+app.use('/login', require('./login.js'));
+app.use('/sign_up', require('./sign_up.js'));
+app.use('/user_profile', require('./user_profile.js'));
 
 app.use(function(req,res){
     res.status(404);
