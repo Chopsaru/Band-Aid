@@ -1,18 +1,18 @@
-body, html{
+/*-------------------------------------------Background Image---------------------------------------------------------*/
+body, html {
     height: 100%;
 }
-
 .bg {
     /* The image used */
-    background-image: url("/images/music-show-concert-live.jpg");
+    background-image: url("../images/music-show-concert-live.jpg");
+
     /* Full height */
     height: 100%;
+
     /* Center and scale the image nicely */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    margin: 0px;
-    padding: 0px;
 }
 
 .send-button{
