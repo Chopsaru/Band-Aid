@@ -6,7 +6,7 @@
  *******************************************************************************/
 
 var express = require('express');
-//var mysql = require('./dbcon.js');
+var mysql = require('./dbcon.js');
 var app = express();
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 var bodyParser = require('body-parser');
@@ -19,7 +19,7 @@ app.use('/', express.static('public'));
 
 app.set('view engine', 'handlebars');
 app.set('port', process.argv[2]);
-//app.set('mysql', mysql);
+app.set('mysql', mysql);
 
 app.use('/home', require('./home.js'));
 app.use('/login', require('./login.js'));
