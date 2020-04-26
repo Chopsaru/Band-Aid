@@ -1,0 +1,137 @@
+﻿<link rel="stylesheet" href = "/css/user_profile.css">
+<title>Sign up for Band Aid</title>
+
+<!--------------------------------------------------- NAV BAR --------------------------------------------------------->
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand ml-auto" href="index.html">
+        <img src="/images/band_aid_icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        Band Aid
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link mr-auto" href="login.html">TEST USER <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!--------------------------------------------------- Profile --------------------------------------------------------->
+<!-- credit - https://bootsnipp.com/snippets/K0ZmK -->
+
+<<div class="container emp-profile">
+    <form method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img src="/images/spencer_sample.JPG"/>
+                    <div class="file btn btn-lg btn-primary">
+                        Change Photo
+                        <input type="file" name="file"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5>
+                        Eddie Van Halen
+                    </h5>
+                    <h6>
+                        Hollywood, CA
+                    </h6>
+                    <p class="proile-rating">Skill Level : <span>Professional</span></p>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Inbox</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                    <p>Social Media</p>
+                    <a href="">Facebook</a><br/>
+                    <a href="">Instagram</a><br/>
+                    <a href="">Linkedin</a>
+                    <p>Other Instruments</p>
+                    <a href="">Banjo</a><br/>
+                    <a href="">Steel Guitar</a><br/>
+                    <a href="">Mandolin</a><br/>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Inbox</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Place Inbox Here</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Primary Instrument</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Guitar</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Looking for</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Paid Gig</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Preferred Genre</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>80's Glam Rock</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Email</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>eddieSlays@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Phone</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>867-5309</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>About</label><br/>
+                                <p>Looking to shred your face off!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
