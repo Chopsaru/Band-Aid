@@ -12,15 +12,17 @@ var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 var bodyParser = require('body-parser');
 
 app.engine('handlebars', handlebars.engine);
+app.set('view engine', 'handlebars');
 
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(express.static('/public'));
+app.use(bodyParser.json());
+app.use(express.static('public'));
 
-app.set('view engine', 'handlebars');
-app.set('port', process.argv[2]);
+
+app.set('port', 5000);
 app.set('mysql', mysql);
 
-app.use('/', express.static(__dirnname));
+//app.use('/', express.static('/public'))
 app.use('/home', require('./home.js'));
 app.use('/login', require('./login.js'));
 app.use('/sign_up', require('./sign_up.js'));
@@ -38,6 +40,6 @@ app.use(function(err, req, res, next){
     res.render('500');
 });
 
-app.listen(5000, function(){
+app.listen(app.get('port'), function(){
     console.log('Express started on http://54.89.126.206:5000/' +  '; press Ctrl-C to terminate.');
 });
