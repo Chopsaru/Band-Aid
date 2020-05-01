@@ -7,7 +7,7 @@ module.exports = function(){
     function getUserProfile(res, mysql, context, id, complete){
 
         // Construct query--------------------------------------------------------------
-        var sql = "INSERT SQL QUERY";
+        var sql = "SELECT  query_id, musician_id, email, fname, lname, phone, social, zip FROM Users WHERE user_id = ?";
         var inserts = [id];
 
         // Query and store results------------------------------------------------------
@@ -41,24 +41,23 @@ module.exports = function(){
     });
 */
 
-    router.get('/',function(req,res) {
-/*-------------------for future use-----------------------------------------
+    router.get('/:id',function(req,res) {
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["DELETE JS CODE NAME", "EDIT JS CODE NAME"];
+        context.jsscripts = [];
         var mysql = req.app.get('mysql');
 
-        getUserProfile(res, mysql,context,complete);
-        getUserID(res, mysql,context,complete);
+        getUserProfile(res, mysql, context, req.params.id, complete);
+        //getUserID(res, mysql,context,complete);
 
         function complete(){
             callbackCount++;
-            if(callbackCount >= 2){
+            if(callbackCount >= 1){
                 res.render('user_profile',context);
             }
         }
- */
-        res.render('user_profile')
+
+        //res.render('user_profile')
     });
 
 /*
