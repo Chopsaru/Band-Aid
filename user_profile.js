@@ -9,7 +9,7 @@ module.exports = function(){
         // Construct query--------------------------------------------------------------
         var sql = "SELECT  query_id, musician_id, email, fname, lname, phone, social, zip FROM Users WHERE user_id = ?";
         var inserts = [id];
-
+        console.log("made it past query")
         // Query and store results------------------------------------------------------
         mysql.pool.query(sql, inserts, function(error, results){
             if(error){
@@ -22,7 +22,7 @@ module.exports = function(){
     }
 //-------------------------------------------get single user id---------------------------------------------------------
     function getUserID(res, mysql, context, complete) {
-       var sql = "SELECT DISTINCT user_id,......";
+        var sql = "SELECT DISTINCT user_id,......";
 
         mysql.pool.query(sql, function(error, results, fields){
             if(error){
@@ -35,11 +35,11 @@ module.exports = function(){
     }
 
     //show user profile page
-/*
-    router.get('/',function(req,res) {
-        res.render('user_profile')
-    });
-*/
+    /*
+        router.get('/',function(req,res) {
+            res.render('user_profile')
+        });
+    */
 
     router.get('/:id',function(req,res) {
         var callbackCount = 0;
@@ -60,41 +60,39 @@ module.exports = function(){
         //res.render('user_profile')
     });
 
-/*
-    // Update or edit planet row value
-    router.put('/:id', function(req, res){
-        var mysql = req.app.get('mysql');
-
-        mysql.pool.query("UPDATE Planet SET name=?, classification=?, mass=?, known_number_of_moons=? WHERE planet_ID=?",
-            [req.body.name, req.body.classification, req.body.mass, req.body.num_moons, req.params.id],
-            function(error){
+    /*
+        // Update or edit planet row value
+        router.put('/:id', function(req, res){
+            var mysql = req.app.get('mysql');
+            mysql.pool.query("UPDATE Planet SET name=?, classification=?, mass=?, known_number_of_moons=? WHERE planet_ID=?",
+                [req.body.name, req.body.classification, req.body.mass, req.body.num_moons, req.params.id],
+                function(error){
+                    if(error){
+                        console.log(error);
+                        res.write(JSON.stringify(error));
+                        res.end();
+                    }else{
+                        res.status(200);
+                        res.end();
+                    }
+                });
+        });
+        // Delete planet from Planet table
+        router.delete('/:id', function(req, res){
+            var mysql = req.app.get('mysql');
+            var sql = "DELETE FROM Planet WHERE planet_id = ?";
+            var inserts = [req.params.id];
+            sql = mysql.pool.query(sql, inserts, function(error){
                 if(error){
-                    console.log(error);
+                    console.log(error)
                     res.write(JSON.stringify(error));
+                    res.status(400);
                     res.end();
                 }else{
-                    res.status(200);
-                    res.end();
+                    res.status(202).end();
                 }
-            });
-    });
-
-    // Delete planet from Planet table
-    router.delete('/:id', function(req, res){
-        var mysql = req.app.get('mysql');
-        var sql = "DELETE FROM Planet WHERE planet_id = ?";
-        var inserts = [req.params.id];
-        sql = mysql.pool.query(sql, inserts, function(error){
-            if(error){
-                console.log(error)
-                res.write(JSON.stringify(error));
-                res.status(400);
-                res.end();
-            }else{
-                res.status(202).end();
-            }
-        })
-    });
-*/
+            })
+        });
+    */
     return router;
 }();
