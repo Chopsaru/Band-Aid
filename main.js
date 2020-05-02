@@ -28,6 +28,9 @@ app.use('/login', require('./login.js'));
 app.use('/sign_up', require('./sign_up.js'));
 app.use('/user_profile', require('./user_profile.js'));
 app.use('/search', require('./search.js'));
+app.use('/search/q1', require('./q1.js'));
+app.use('/search/q2', require('./q2.js'));
+app.use('/search/q3', require('./q3.js'));
 
 app.use(function(req,res){
     res.status(404);
