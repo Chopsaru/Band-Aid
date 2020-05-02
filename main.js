@@ -27,6 +27,7 @@ app.use('/home', require('./home.js'));
 app.use('/login', require('./login.js'));
 app.use('/sign_up', require('./sign_up.js'));
 app.use('/user_profile', require('./user_profile.js'));
+app.use('/search', require('./search.js'));
 
 app.use(function(req,res){
     res.status(404);
