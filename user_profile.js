@@ -47,6 +47,8 @@ module.exports = function(){
         context.jsscripts = [];
         var mysql = req.app.get('mysql');
 
+        context.jsscripts = ["updateUserProfile.js"];
+
         getUserProfile(res, mysql, context, req.params.id, complete);
         //getUserID(res, mysql,context,complete);
 
@@ -60,12 +62,31 @@ module.exports = function(){
         //res.render('user_profile')
     });
 
-    /*
         // Update or edit planet row value
-        router.put('/:id', function(req, res){
+
+    router.get('/edit_user:id', function(req, res){
+        callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["updateUserProfie.js"];
+        var mysql = req.app.get('mysql');
+        getUserProfile(res, mysql, context, req.params.id, complete);
+
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                res.render('edit_user_profile', context);
+            }
+
+        }
+    });
+
+        router.put('/edit_profile:id', function(req, res){
+            console.log(req.body);
+            console.log(req.params.id);
+
             var mysql = req.app.get('mysql');
-            mysql.pool.query("UPDATE Planet SET name=?, classification=?, mass=?, known_number_of_moons=? WHERE planet_ID=?",
-                [req.body.name, req.body.classification, req.body.mass, req.body.num_moons, req.params.id],
+            mysql.pool.query("UPDATE Users SET email=?, fname=?, lname=?, phone=?, zip=? WHERE user_id=?",
+                [req.body.email, req.body.fname, req.body.lname, req.body.phone, req.body.zip, req.params.id],
                 function(error){
                     if(error){
                         console.log(error);
@@ -75,8 +96,9 @@ module.exports = function(){
                         res.status(200);
                         res.end();
                     }
-                });
-        });
+                });});
+
+        /*
         // Delete planet from Planet table
         router.delete('/:id', function(req, res){
             var mysql = req.app.get('mysql');
@@ -93,6 +115,7 @@ module.exports = function(){
                 }
             })
         });
-    */
+*/
+
     return router;
 }();
