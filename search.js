@@ -2,7 +2,7 @@ module.exports = function(){
     var express = require('express');
     var router = express.Router();
 
-    //show home page
+    //show search page
     router.get('/',function(req,res) {
         res.render('search')
     });

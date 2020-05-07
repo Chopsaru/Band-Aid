@@ -12,12 +12,9 @@
                     <div class="form-group">
                         <label for="instList">What instrument are you looking for?</label>
                         <select class="form-control" id="instList">
-                            <option>Drums</option>
-                            <option>Guitar</option>
-                            <option>Bass Guitar</option>
-                            <option>Vocalist</option>
-                            <option>Keyboard</option>
-                            <option>Hurdy Gurdy</option>
+                            {{#each instruments}}
+                            <option>{{name}}</option>
+                            {{/each}}
                         </select>
                         <br>
                     </div>
