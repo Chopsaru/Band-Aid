@@ -7,7 +7,7 @@ module.exports = function(){
     function getUserProfile(res, mysql, context, id, complete){
 
         // Construct query--------------------------------------------------------------
-        var sql = "SELECT  query_id, musician_id, email, fname, lname, phone, social, zip FROM Users WHERE user_id = ?";
+        var sql = "SELECT user_id as id, query_id, musician_id, email, fname, lname, phone, social, zip FROM Users WHERE user_id = ?";
         var inserts = [id];
         console.log("made it past query")
         // Query and store results------------------------------------------------------
@@ -44,10 +44,8 @@ module.exports = function(){
     router.get('/:id',function(req,res) {
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = [];
+        context.jsscripts = ["edit_user_profile.js"];
         var mysql = req.app.get('mysql');
-
-        context.jsscripts = ["updateUserProfile.js"];
 
         getUserProfile(res, mysql, context, req.params.id, complete);
         //getUserID(res, mysql,context,complete);
@@ -62,13 +60,14 @@ module.exports = function(){
         //res.render('user_profile')
     });
 
-        // Update or edit planet row value
+    // Update or edit planet row value
 
-    router.get('/edit_user:id', function(req, res){
-        callbackCount = 0;
+    router.get('/edit/:id',function(req,res) {
+        var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["updateUserProfie.js"];
+        context.jsscripts = ["edit_user_profile.js"];
         var mysql = req.app.get('mysql');
+
         getUserProfile(res, mysql, context, req.params.id, complete);
 
         function complete(){
@@ -76,14 +75,31 @@ module.exports = function(){
             if(callbackCount >= 1){
                 res.render('edit_user_profile', context);
             }
-
         }
     });
 
+    // Update password page
+
+    router.get('/edit/password/:id',function(req,res) {
+        var callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["edit_user_profile.js"];
+        var mysql = req.app.get('mysql');
+
+        getUserProfile(res, mysql, context, req.params.id, complete);
+
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                res.render('update_password', context);
+            }
+        }
+    });
+
+/*
         router.put('/edit_profile:id', function(req, res){
             console.log(req.body);
             console.log(req.params.id);
-
             var mysql = req.app.get('mysql');
             mysql.pool.query("UPDATE Users SET email=?, fname=?, lname=?, phone=?, zip=? WHERE user_id=?",
                 [req.body.email, req.body.fname, req.body.lname, req.body.phone, req.body.zip, req.params.id],
@@ -97,7 +113,7 @@ module.exports = function(){
                         res.end();
                     }
                 });});
-
+*/
         /*
         // Delete planet from Planet table
         router.delete('/:id', function(req, res){
