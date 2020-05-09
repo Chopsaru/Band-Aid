@@ -15,7 +15,7 @@ app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 app.set('port', 5000);
 
-app.use(express.static('public'));
+app.use('/static', express.static('public'));
 app.use('/modules', express.static('node_modules'));
 
 app.use(bodyParser.urlencoded({extended:true}));
@@ -27,6 +27,7 @@ app.use('/', require('./home.js'));
 app.use('/login', require('./login.js'));
 app.use('/sign_up', require('./sign_up.js'));
 app.use('/user_profile', require('./user_profile.js'));
+app.use('/', express.static('public'));
 
 app.use(function(req,res){
     res.status(404);

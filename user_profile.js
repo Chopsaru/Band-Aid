@@ -96,10 +96,10 @@ module.exports = function(){
         }
     });
 
-/*
-        router.put('/edit_profile:id', function(req, res){
+        router.put('/:id', function(req, res){
             console.log(req.body);
             console.log(req.params.id);
+            console.log("Made it to put function");
             var mysql = req.app.get('mysql');
             mysql.pool.query("UPDATE Users SET email=?, fname=?, lname=?, phone=?, zip=? WHERE user_id=?",
                 [req.body.email, req.body.fname, req.body.lname, req.body.phone, req.body.zip, req.params.id],
@@ -112,8 +112,9 @@ module.exports = function(){
                         res.status(200);
                         res.end();
                     }
-                });});
-*/
+                })
+        ;});
+
         /*
         // Delete planet from Planet table
         router.delete('/:id', function(req, res){
