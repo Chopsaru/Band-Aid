@@ -10,6 +10,7 @@ var mysql = require('./dbcon.js');
 var app = express();
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 var bodyParser = require('body-parser');
+var ip = require('ip');
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
@@ -46,5 +47,6 @@ app.use(function(err, req, res, next){
 });
 
 app.listen(app.get('port'), function(){
-    console.log('Express started on http://54.89.126.206:5000/' +  '; press Ctrl-C to terminate.');
+    console.log(ip.address());
+    console.log(`Express started on http://${ip.address()}:5000/` +  '; press Ctrl-C to terminate.');
 });

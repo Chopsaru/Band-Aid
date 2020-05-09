@@ -4,6 +4,7 @@
   "description": "Web app to help musicians",
   "main": "main.js",
   "scripts": {
+    "run": "node main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Team 1",
@@ -13,6 +14,7 @@
     "express": "^4.13.2",
     "express-handlebars": "^4.0.3",
     "express-session": "^1.11.3",
-    "mysql": "^2.8.0"
+    "mysql": "^2.8.0",
+    "ip": "^1.1.5"
   }
 }

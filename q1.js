@@ -6,7 +6,7 @@ module.exports = function(){
     function getInstruments(res, mysql, context, complete){
 
         // Construct query--------------------------------------------------------------
-        var sql = "SELECT  name FROM instruments";
+        var sql = "SELECT  name FROM Instruments";
         console.log("made it past query")
         // Query and store results------------------------------------------------------
         mysql.pool.query(sql, function(error, results){
