@@ -99,7 +99,6 @@ module.exports = function(){
         router.put('/:id', function(req, res){
             console.log(req.body);
             console.log(req.params.id);
-            console.log("Made it to put function");
             var mysql = req.app.get('mysql');
             mysql.pool.query("UPDATE Users SET email=?, fname=?, lname=?, phone=?, zip=? WHERE user_id=?",
                 [req.body.email, req.body.fname, req.body.lname, req.body.phone, req.body.zip, req.params.id],
