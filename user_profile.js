@@ -1,9 +1,11 @@
+
 //-------------------------------------------user profile landing page--------------------------------------------------
 module.exports = function(){
     var express = require('express');
     var router = express.Router();
 
-//--------------------------------------- get single user profile data--------------------------------------------------
+//--------------------------------------- get single user profile data -------------------------------------------------
+
     function getUserProfile(res, mysql, context, id, complete){
 
         // Construct query--------------------------------------------------------------
@@ -20,7 +22,28 @@ module.exports = function(){
             complete();
         });
     }
-//-------------------------------------------get single user id---------------------------------------------------------
+
+//-------------------------------------------- get musician data -------------------------------------------------------
+    function getInstruments(res, mysql, context, id, complete){
+        var inserts = [id]
+        mysql.pool.query("SELECT fname, lname, name as insName, proficiency as insProficiency \n" +
+            "FROM users \n" +
+            "INNER JOIN\tmusicians\n" +
+            "ON users.musician_id = musicians.musician_id\n" +
+            "INNER JOIN instruments\n" +
+            "ON musicians.instrument_id = instruments.instrument_id\n" +
+            "WHERE user_id = ?", inserts,function(error, results){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.instruments  = results;
+            complete();
+        });
+    }
+
+//------------------------------------------ get single user id --------------------------------------------------------
+
     function getUserID(res, mysql, context, complete) {
         var sql = "SELECT DISTINCT user_id,......";
 
@@ -34,12 +57,7 @@ module.exports = function(){
         });
     }
 
-    //show user profile page
-    /*
-        router.get('/',function(req,res) {
-            res.render('user_profile')
-        });
-    */
+//------------------------------------------ get and display single user -----------------------------------------------
 
     router.get('/:id',function(req,res) {
         var callbackCount = 0;
@@ -56,11 +74,9 @@ module.exports = function(){
                 res.render('user_profile', context);
             }
         }
-
-        //res.render('user_profile')
     });
 
-    // Update or edit planet row value
+//----------------------------------- get and display single user for editing ------------------------------------------
 
     router.get('/edit/:id',function(req,res) {
         var callbackCount = 0;
@@ -69,16 +85,17 @@ module.exports = function(){
         var mysql = req.app.get('mysql');
 
         getUserProfile(res, mysql, context, req.params.id, complete);
+        getInstruments(res, mysql, context, req.params.id, complete);
 
         function complete(){
             callbackCount++;
-            if(callbackCount >= 1){
+            if(callbackCount >= 2){
                 res.render('edit_user_profile', context);
             }
         }
     });
 
-    // Update password page
+//----------------------------------- change password page ####not functioning yet######--------------------------------
 
     router.get('/edit/password/:id',function(req,res) {
         var callbackCount = 0;
@@ -95,6 +112,9 @@ module.exports = function(){
             }
         }
     });
+
+//----------------------------------- updates database for user_profile change -----------------------------------------
+    //Need to get instrument, skill level, and gig going #############################################
 
         router.put('/:id', function(req, res){
             console.log(req.body);
@@ -114,7 +134,7 @@ module.exports = function(){
                 })
         ;});
 
-        // Delete user
+//--------------------------------------------- delete user profiles ---------------------------------------------------
         router.delete('/:id', function(req, res){
             console.log("Made it to delete function")
             var mysql = req.app.get('mysql');

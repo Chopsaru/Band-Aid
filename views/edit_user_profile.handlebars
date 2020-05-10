@@ -30,7 +30,9 @@
                         <!--------------------Need to update queries for musician and instruments---------------------------->
                         <label>Instrument</label>
                         <select id="inputInstrument" class="form-control">
-                            <option> Choose...</option>
+                           {{#each instruments}}
+                            <option >{{insName}}</option>
+                            {{/each}}
                             <option>Piano</option>
                             <option>Guitar</option>
                             <option>Flute</option>
@@ -41,7 +43,9 @@
                     <div class="form-group col-md-6 ">
                         <label>Skill Level</label>
                         <select id="inputSkill" class="form-control">
-                            <option> Choose...</option>
+                            {{#each instruments}}
+                                <option >{{insProficiency}}</option>
+                            {{/each}}
                             <option>Amateur</option>
                             <option>Intermediate</option>
                             <option>Expert</option>
