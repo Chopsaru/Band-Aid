@@ -42,12 +42,12 @@ module.exports = function(){
         let emp = req.body;
         console.log(emp)
         let sql = "INSERT INTO Queries (query_id, zip_code, instrument, proficiency, description) \
-            VALUES (?, '-1', ?, '-1', '-1') \
+            VALUES (?, '-1', ?, '-1', '') \
             ON DUPLICATE KEY UPDATE instrument = ?;";
         let inserts = [req.params.qid, emp.instrument, emp.instrument];
 
         console.log("INSERT INTO Queries (query_id, zip_code, instrument, proficiency, description) \
-        VALUES (" + req.params.qid + ", '-1', " + emp.instrument + ", '-1', '-1') \
+        VALUES (" + req.params.qid + ", '-1', " + emp.instrument + ", '-1', '') \
         ON DUPLICATE KEY UPDATE instrument = " + emp.instrument + ";")
 
         var mysql = req.app.get('mysql');
