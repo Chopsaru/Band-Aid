@@ -46,14 +46,19 @@ body{
     color: #0062cc;
 }
 .profile-edit-btn{
-    border: none;
+    border-style: solid;
     border-radius: 1.5rem;
     width: 70%;
     padding: 2%;
     font-weight: 600;
-    color: #6c757d;
+    color: #6c7282;
     cursor: pointer;
 }
+
+.profile-edit-btn:hover{
+    background-color: lightskyblue;
+}
+
 .proile-rating{
     font-size: 12px;
     color: #818182;

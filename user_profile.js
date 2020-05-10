@@ -44,7 +44,7 @@ module.exports = function(){
     router.get('/:id',function(req,res) {
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["edit_user_profile.js"];
+        context.jsscripts = ["edit_user_profile.js","delete_user_profile.js"];
         var mysql = req.app.get('mysql');
 
         getUserProfile(res, mysql, context, req.params.id, complete);
@@ -65,7 +65,7 @@ module.exports = function(){
     router.get('/edit/:id',function(req,res) {
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["edit_user_profile.js"];
+        context.jsscripts = ["edit_user_profile.js","delete_user_profile.js"];
         var mysql = req.app.get('mysql');
 
         getUserProfile(res, mysql, context, req.params.id, complete);
@@ -83,7 +83,7 @@ module.exports = function(){
     router.get('/edit/password/:id',function(req,res) {
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["edit_user_profile.js"];
+        context.jsscripts = ["edit_user_profile.js","delete_user_profile.js"];
         var mysql = req.app.get('mysql');
 
         getUserProfile(res, mysql, context, req.params.id, complete);
@@ -114,11 +114,11 @@ module.exports = function(){
                 })
         ;});
 
-        /*
-        // Delete planet from Planet table
+        // Delete user
         router.delete('/:id', function(req, res){
+            console.log("Made it to delete function")
             var mysql = req.app.get('mysql');
-            var sql = "DELETE FROM Planet WHERE planet_id = ?";
+            var sql = "DELETE FROM Users WHERE user_id = ?";
             var inserts = [req.params.id];
             sql = mysql.pool.query(sql, inserts, function(error){
                 if(error){
@@ -131,7 +131,6 @@ module.exports = function(){
                 }
             })
         });
-*/
 
     return router;
 }();

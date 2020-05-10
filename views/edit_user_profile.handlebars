@@ -61,6 +61,9 @@
             <button onclick="updateUserProfile({{user_profile.id}})" class="btn btn-default send-button">Update Account</button>
             </br></br>
             Click <a href="/user_profile/edit/password/{{user_profile.id}}"">here</a> to change account password
+            </br></br>
+            If you want to delete Band Aid User Account click
+            <button onclick="areYouSure(); deleteUserProfile({{user_profile.id}})">Delete</button>
         </div>
     </div>
 </div>
