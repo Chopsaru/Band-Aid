@@ -23,7 +23,7 @@ app.use(express.static('public'));
 app.set('port', 5000);
 app.set('mysql', mysql);
 
-//app.use('/', express.static('/public'))
+// app.use('/', express.static('/public'))
 app.use('/home', require('./home.js'));
 app.use('/login', require('./login.js'));
 app.use('/sign_up', require('./sign_up.js'));

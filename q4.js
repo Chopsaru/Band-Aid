@@ -27,7 +27,7 @@ module.exports = function(){
         context.jsscripts = [];
         var mysql = req.app.get('mysql');
 
-        getDesc(res, mysql, context, req.params.qid, complete);
+        // getDesc(res, mysql, context, req.params.qid, complete);
 
         function complete(){
             callbackCount++;

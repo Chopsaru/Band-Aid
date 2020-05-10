@@ -6,7 +6,7 @@ module.exports = function(){
     function getInstruments(res, mysql, context, complete){
 
         // Construct query--------------------------------------------------------------
-        var sql = "SELECT  name FROM Instruments";
+        let sql = "SELECT name FROM Instruments";
         // Query and store results------------------------------------------------------
         mysql.pool.query(sql, function(error, results){
             if(error){
@@ -20,10 +20,10 @@ module.exports = function(){
 
     //show page
     router.get('/:qid',function(req,res) {
-        var callbackCount = 0;
-        var context = {};
-        context.jsscripts = ["new_query_instruments.js"];
-        var mysql = req.app.get('mysql');
+        let callbackCount = 0;
+        let context = {};
+        context.jsscripts = ["new_query_instrument.js"];
+        let mysql = req.app.get('mysql');
 
         getInstruments(res, mysql, context, complete);
 
@@ -41,13 +41,13 @@ module.exports = function(){
     router.post('/:qid', (req, res) => {
         let emp = req.body;
         console.log(emp)
-        var sql = "INSERT INTO queries (query_id, radius, instrument, proficiency, description) \
-            VALUES (?, '-1', ?, -1, '-1') \
+        let sql = "INSERT INTO Queries (query_id, zip_code, instrument, proficiency, description) \
+            VALUES (?, '-1', ?, '-1', '-1') \
             ON DUPLICATE KEY UPDATE instrument = ?;";
-        var inserts = [req.params.qid, emp.instrument, emp.instrument];
+        let inserts = [req.params.qid, emp.instrument, emp.instrument];
 
-        console.log("INSERT INTO queries (query_id, radius, instrument, proficiency, description) \
-        VALUES (" + req.params.qid + ", '-1', " + emp.instrument + ", -1, '-1') \
+        console.log("INSERT INTO Queries (query_id, zip_code, instrument, proficiency, description) \
+        VALUES (" + req.params.qid + ", '-1', " + emp.instrument + ", '-1', '-1') \
         ON DUPLICATE KEY UPDATE instrument = " + emp.instrument + ";")
 
         var mysql = req.app.get('mysql');
@@ -57,8 +57,9 @@ module.exports = function(){
                 res.end();
             }
             else{
-                console.log("query sucess")
+                console.log("query Success")
                 res.status(200);
+                res.end();
             }
         });
     });
