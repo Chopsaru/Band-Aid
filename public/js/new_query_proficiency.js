@@ -3,7 +3,6 @@
 $(document).ready(function () {
     function newQueryProficiency(qid) {
         console.log("form data: " + $("#new_query_proficiency_form").serialize());
-
         // $.ajax doesn't work since jquery is not loaded correctly
         // fall back to XMLHttpRequest
         let xhttp = new XMLHttpRequest();
