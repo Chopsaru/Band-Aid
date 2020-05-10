@@ -1,76 +1,98 @@
+<script>
+
+    // Function to check Whether both passwords
+    // is same or not.
+    function checkPassword(form) {
+        password1 = form.password1.value;
+        password2 = form.password2.value;
+
+        // If password not entered
+        if (password1 == '')
+            alert ("Please enter Password");
+
+        // If confirm password not entered
+        else if (password2 == '')
+            alert ("Please enter confirm password");
+
+        // If Not same return False.
+        else if (password1 != password2) {
+            alert ("\nPassword did not match: Please try again...")
+            return false;
+        }
+
+        // If same return True.
+        else{
+            alert("Success: Account Created")
+            return true;
+        }
+    }
+</script>
+
 <link rel="stylesheet" href = "/css/index.css">
 <title>Sign up for Band Aid</title>
-
-<!--------------------------------------------------- Sign Up --------------------------------------------------------->
-<div class="bg">
-    <br /><br />
-    <div class="container forms.container">
-        <div class="col-md-6 mx-auto shadow-border form-bg">
-            <h1> Join Band Aid</h1>
-            <form>
-                   
-                <label>Email:</label>
-                <input type="email" class="form-control" id="registerEmail" placeholder="Email Address">
-                <label>Password:</label>
-                <input type="password" class="form-control" id="registerPassword" placeholder="Password">
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label>First Name:</label>
-                        <input type="text" class="form-control" id="registerFirstName" placeholder="First Name">
+    <!--------------------------------------------------- Sign Up --------------------------------------------------------->
+    <div class="bg">
+        <br />
+        <div class="container forms.container">
+            <div class="col-md-6 mx-auto shadow-border form-bg">
+                <h1>Create Account</h1>
+                <form onSubmit = "return checkPassword(this)" id="create_profile" method="post">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>First Name:</label>
+                            <input type="text" class="form-control" name="fname">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Last Name:</label>
+                            <input type="text" class="form-control" name="lname">
+                        </div>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label>Last Name:</label>
-                        <input type="text" class="form-control" id="registerLastName" placeholder="Last Name">
+                    <label>Email:</label>
+                    <input type="text" class="form-control" name="email">
+                    <label>Phone Number:</label>
+                    <input type="number" class="form-control" name="phone">
+                    <label>Zip Code:</label>
+                    <input type="number" class="form-control" name="zip">
+                    <div class="form-row">
+                        <div class="form-group col-md-6 ">
+                            <!--------------------Need to update queries for musician and instruments---------------------------->
+                            <label>Instrument</label>
+                            <select id="inputInstrument" class="form-control">
+                                <option> Choose...</option>
+                                <option>Piano</option>
+                                <option>Guitar</option>
+                                <option>Flute</option>
+                                <option>Saxophone</option>
+                                <option>Bass</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6 ">
+                            <label>Skill Level</label>
+                            <select id="inputSkill" class="form-control">
+                                <option> Choose...</option>
+                                <option>Amateur</option>
+                                <option>Intermediate</option>
+                                <option>Expert</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <label>Phone Number:</label>
-                <input type="number" class="form-control" id="registerPhone" placeholder="Phone Number">
-                <div class="form-row">
-                    <div class="form-group col-md-6 ">
-                        <label>City:</label>
-                        <input type="text" class="form-control" id="registerCity" placeholder="City">
+                    <label>Social Media:</label>
+                    <input type="text" class="form-control" name="social">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"> Are you looking to join a band?
+                        </label>
                     </div>
-                    <div class="form-group col-md-6 ">
-                        <label>Country</label>
-                        <select id="inputCountry" class="form-control">
-                            <option> Choose...</option>
-                            <option>United States</option>
-                            <option>Canada</option>
-                            <option>United Kingdom</option>
-                        </select>
+                    <div class="form-group">
+                        <label>Enter Password:</label>
+                        <input type="password" class="form-control" name="password1">
                     </div>
-                    
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6 ">
-                        <label>Instrument</label>
-                        <select id="inputInstrument" class="form-control">
-                            <option> Choose...</option>
-                            <option>Piano</option>
-                            <option>Guitar</option>
-                            <option>Flute</option>
-                            <option>Saxophone</option>
-                            <option>Bass</option>
-                        </select>
+                    <div class="form-group">
+                        <label> Re-Type Password:</label>
+                        <input type="password" class="form-control" name="password2">
                     </div>
-                    <div class="form-group col-md-6 ">
-                        <label>Skill Level</label>
-                        <select id="inputSkill" class="form-control">
-                            <option> Choose...</option>
-                            <option>Amateur</option>
-                            <option>Intermediate</option>
-                            <option>Expert</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox"> Are you looking to join a band?
-                    </label>
-                </div>
-                <button type="submit" class="btn btn-default send-button">Register</button>
-            </form>
+                    <button type="submit" class="btn btn-default g-button">Register</button
+                </form>
+            </div>
         </div>
     </div>
-</div>
