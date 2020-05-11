@@ -10,6 +10,7 @@ var mysql = require('./dbcon.js');
 var app = express();
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 var bodyParser = require('body-parser');
+var ip = require('ip');
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
@@ -23,11 +24,16 @@ app.use(bodyParser.json());
 
 app.set('mysql', mysql);
 
+// app.use('/', express.static('/public'))
 app.use('/', require('./home.js'));
 app.use('/login', require('./login.js'));
 app.use('/sign_up', require('./sign_up.js'));
 app.use('/user_profile', require('./user_profile.js'));
-app.use('/', express.static('public'));
+app.use('/search', require('./search.js'));
+app.use('/search/q1', require('./q1.js'));
+app.use('/search/q2', require('./q2.js'));
+app.use('/search/q3', require('./q3.js'));
+app.use('/search/q4', require('./q4.js'));
 
 app.use(function(req,res){
     res.status(404);
@@ -42,5 +48,6 @@ app.use(function(err, req, res, next){
 });
 
 app.listen(app.get('port'), function(){
-    console.log('Express started on http://54.89.126.206:5000/' +  '; press Ctrl-C to terminate.');
+    console.log(ip.address());
+    console.log(`Express started on http://${ip.address()}:5000/` +  '; press Ctrl-C to terminate.');
 });

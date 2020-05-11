@@ -1,0 +1,32 @@
+﻿<!--<html>-->
+<!--<link rel="stylesheet" href="/css/index.css">-->
+<!--<title>Login into Band Aid</title>-->
+
+<div class="bg">
+    <!--------------------------------------------------- Login Form --------------------------------------------------------->
+    </br></br></br> <!----Temp Fix ---->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mx-auto shadow-border form-bg">
+                <form id="new_query_proficiency_form" method="POST">
+                    <div class="form-group">
+                        <label for="profList">What is the minimum proficiency the musician should have with their
+                            instrument?</label>
+                        <select class="form-control" name="proficiency">
+                            {{#each proficiency}}
+                                <option value="{{proficiency_name}}">{{proficiency_name}}</option>
+                            {{/each}}
+                        </select>
+                        <br>
+                    </div>
+                    <div class="form-group">
+                        <button id="submit_btn" data-id="{{qid}}" class="btn btn-default g-button">Next</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--</div>-->
+<!--</html>-->
