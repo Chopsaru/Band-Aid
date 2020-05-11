@@ -1,7 +1,7 @@
 /*********************************************************************************
  ** Program Name:	main.js
  ** Authors:		Team Band Aid
- ** Date:		    4/17/2020
+ ** Date:		    5/9/2020
  ** Description:	js to run Band Aid Home Page
  *******************************************************************************/
 
@@ -13,20 +13,21 @@ var bodyParser = require('body-parser');
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
+app.set('port', 5000);
+
+app.use('/static', express.static('public'));
+app.use('/modules', express.static('node_modules'));
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
-app.use(express.static('public'));
 
-
-app.set('port', 5000);
 app.set('mysql', mysql);
 
-//app.use('/', express.static('/public'))
-app.use('/home', require('./home.js'));
+app.use('/', require('./home.js'));
 app.use('/login', require('./login.js'));
 app.use('/sign_up', require('./sign_up.js'));
 app.use('/user_profile', require('./user_profile.js'));
+app.use('/', express.static('public'));
 
 app.use(function(req,res){
     res.status(404);

@@ -19,7 +19,7 @@
             <div class="col-md-6">
                 <div class="profile-head">
                     <h5>
-                        Eddie Van Halen
+                        First Name: {{user_profile.fname}}, Last Name: {{user_profile.lname}}
                     </h5>
                     <h6>
                         Hollywood, CA
@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                <a class="profile-edit-btn" href="/user_profile/edit/{{user_profile.id}}">Edit/Delete Profile</a>
             </div>
         </div>
         <div class="row">
