@@ -59,14 +59,18 @@ module.exports = function(){
 
 //------------------------------------------ get and display single user -----------------------------------------------
 
-    router.get('/:id',function(req,res) {
-        var callbackCount = 0;
+    router.get('/', isAuthenticated, function(req,res) {
+        //var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["edit_user_profile.js","delete_user_profile.js"];
+        //context.jsscripts = ["edit_user_profile.js","delete_user_profile.js"];
+        context.username = req.session.user.username;
+        context.full_name = req.session.user.full_name;
+        res.render('user_profile', context);
+        /*
         var mysql = req.app.get('mysql');
 
         getUserProfile(res, mysql, context, req.params.id, complete);
-        //getUserID(res, mysql,context,complete);
+        getUserID(res, mysql,context,complete);
 
         function complete(){
             callbackCount++;
@@ -74,8 +78,16 @@ module.exports = function(){
                 res.render('user_profile', context);
             }
         }
+        */
     });
 
+    function isAuthenticated(req, res, next) {
+      if (req.session.user)
+          return next();
+
+      // IF A USER ISN'T LOGGED IN, THEN REDIRECT THEM SIGNIN PAGE
+      res.redirect('/login');
+    }
 //----------------------------------- get and display single user for editing ------------------------------------------
 
     router.get('/edit/:id',function(req,res) {

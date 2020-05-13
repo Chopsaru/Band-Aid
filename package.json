@@ -10,9 +10,13 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.13.3",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.5",
     "express": "^4.13.2",
     "express-handlebars": "^4.0.3",
     "express-session": "^1.11.3",
-    "mysql": "^2.8.0"
+    "mysql": "^2.8.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
   }
 }
