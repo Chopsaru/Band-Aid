@@ -4,6 +4,25 @@ module.exports = function(){
     var express = require('express');
     var router = express.Router();
 
+//----------------------------------------------- session handlers -----------------------------------------------------
+    // handles user if not signed in
+    const redirectLogin = (req, res, next) =>{
+        if(!req.session.userId){
+            res.redirect('/login')
+        } else {
+            next()
+        }
+    }
+
+// handles user if signed in
+    const redirectUser_Profile = (req, res, next) =>{
+        if(req.session.userId){
+            res.redirect('/user_profile/' + req.session)
+        } else {
+            next()
+        }
+    }
+
 //--------------------------------------- get single user profile data -------------------------------------------------
 
     function getUserProfile(res, mysql, context, id, complete){
@@ -11,7 +30,7 @@ module.exports = function(){
         // Construct query--------------------------------------------------------------
         var sql = "SELECT user_id as id, query_id, musician_id, email, fname, lname, phone, social, zip FROM Users WHERE user_id = ?";
         var inserts = [id];
-        console.log("made it past query")
+
         // Query and store results------------------------------------------------------
         mysql.pool.query(sql, inserts, function(error, results){
             if(error){
@@ -42,31 +61,18 @@ module.exports = function(){
         });
     }
 
-//------------------------------------------ get single user id --------------------------------------------------------
-
-    function getUserID(res, mysql, context, complete) {
-        var sql = "SELECT DISTINCT user_id,......";
-
-        mysql.pool.query(sql, function(error, results, fields){
-            if(error){
-                res.write(JSON.stringify(error));
-                res.end();
-            }
-            context.user_id = results;
-            complete();
-        });
-    }
-
 //------------------------------------------ get and display single user -----------------------------------------------
 
-    router.get('/:id',function(req,res) {
+    router.get('/:id', redirectLogin, function(req,res) {
+        console.log(req.session);
+        console.log(req.session.userId);
+
         var callbackCount = 0;
         var context = {};
         context.jsscripts = ["edit_user_profile.js","delete_user_profile.js"];
         var mysql = req.app.get('mysql');
 
-        getUserProfile(res, mysql, context, req.params.id, complete);
-        //getUserID(res, mysql,context,complete);
+        getUserProfile(res, mysql, context, req.session.userId, complete);
 
         function complete(){
             callbackCount++;

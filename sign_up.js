@@ -4,7 +4,8 @@ module.exports = function(){
 
     //show home page
     router.get('/',function(req,res) {
-        res.render('sign_up')
+        console.log(req.session);
+        res.render('sign_up');
     });
 
     return router;
