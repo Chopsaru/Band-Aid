@@ -5,7 +5,7 @@ module.exports = function(){
     function getProficiencies(res, mysql, context, complete){
 
         // Construct query--------------------------------------------------------------
-        let sql = "SELECT name FROM Proficiency";
+        let sql = "SELECT * FROM Proficiencies";
         // Query and store results------------------------------------------------------
         mysql.pool.query(sql, function(error, results){
             if(error){
@@ -19,15 +19,14 @@ module.exports = function(){
     }
 
     //show page
-    router.get('/:qid',function(req,res) {
+    router.get('/:uid',function(req,res) {
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["new_query_proficiency.js"];
         var mysql = req.app.get('mysql');
 
         getProficiencies(res, mysql, context, complete);
 
-        context.qid = req.params.qid;
+        context.uid = req.params.uid;
 
         function complete(){
             callbackCount++;
@@ -35,30 +34,6 @@ module.exports = function(){
                 res.render('q2', context);
             }
         }
-    });
-
-    //put submit instrument
-    router.post('/:qid', (req, res) => {
-        let emp = req.body;
-        console.log(emp)
-        var sql = "UPDATE Queries SET proficiency = ? where query_id = ?";
-        var inserts = [emp.proficiency, req.params.qid];
-
-        console.log("UPDATE Queries SET proficiency = " + emp.proficiency +
-            "where query_id = " + req.params.qid);
-
-        var mysql = req.app.get('mysql');
-        mysql.pool.query(sql, inserts, function(error){
-            if(error){
-                res.write(JSON.stringify(error));
-                res.end();
-            }
-            else{
-                console.log("query success")
-                res.status(200);
-                res.end();
-            }
-        });
     });
 
     return router;

@@ -19,15 +19,14 @@ module.exports = function(){
     }
 
     //show page
-    router.get('/:qid',function(req,res) {
+    router.get('/:uid',function(req,res) {
         let callbackCount = 0;
         let context = {};
-        context.jsscripts = ["new_query_instrument.js"];
         let mysql = req.app.get('mysql');
 
         getInstruments(res, mysql, context, complete);
 
-        context.qid = req.params.qid;
+        context.uid = req.params.uid;
 
         function complete(){
             callbackCount++;
@@ -35,33 +34,6 @@ module.exports = function(){
                 res.render('q1', context);
             }
         }
-    });
-
-    //post submit instrument
-    router.post('/:qid', (req, res) => {
-        let emp = req.body;
-        console.log(emp)
-        let sql = "INSERT INTO Queries (query_id, zip_code, instrument, proficiency, description) \
-            VALUES (?, '-1', ?, '-1', '') \
-            ON DUPLICATE KEY UPDATE instrument = ?;";
-        let inserts = [req.params.qid, emp.instrument, emp.instrument];
-
-        console.log("INSERT INTO Queries (query_id, zip_code, instrument, proficiency, description) \
-        VALUES (" + req.params.qid + ", '-1', " + emp.instrument + ", '-1', '') \
-        ON DUPLICATE KEY UPDATE instrument = " + emp.instrument + ";")
-
-        var mysql = req.app.get('mysql');
-        mysql.pool.query(sql, inserts, function(error){
-            if(error){
-                res.write(JSON.stringify(error));
-                res.end();
-            }
-            else{
-                console.log("query Success")
-                res.status(200);
-                res.end();
-            }
-        });
     });
 
     return router;

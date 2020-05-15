@@ -18,7 +18,7 @@
 
             <!--New Search Button-->
             <div class="col-md-5 mx-auto form-group">
-                <a class="btn btn-block g-button" href="/search/q1">
+                <a class="btn btn-block g-button" href="/search/q1/{{uid}}">
                     <i class="fa fa-google"></i> New Search
                 </a>
             </div>
@@ -26,6 +26,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
+                    {{#if matches}}
                     <table class="table table-bordered">
                         <thead>
                         <tr>
@@ -36,6 +37,7 @@
                         </tr>
                         </thead>
                         <tbody>
+                        
                         {{#each matches}}
                         <tr>
                             <td>
@@ -49,20 +51,31 @@
                             <td><a href="{{demo_link}}">Link</a></td>
                         </tr>
                         {{/each}}
+                        
+                        
                         </tbody>
                     </table>
                     </div>
                 </div>
                 </div>
 
-            
-
+            <div class="form-group">
+                <label for="queryDesc">Tell them what you are looking for!</label>
+                <textarea class="form-control"  rows="3"></textarea>
+            </div>
+                        
             <br>                    
             <div class="col-md-5 mx-auto form-group">
                     <a class="btn btn-block send-button" href="/user_id/inbox">
                         <i class="fa fa-google"></i> Invite Musicians
                     </a>
-                </div>
+                    
+            </div>
+            {{else}}
+            <div class="container">
+                <h2 class="text-center">No Musicians Found</h2>
+            </div>
+            {{/if}}
         
                         
                          

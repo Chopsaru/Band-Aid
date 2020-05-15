@@ -1,6 +1,6 @@
 ﻿<!--<html>-->
 <!--<link rel="stylesheet" href="/css/index.css">-->
-<!--<title>Login into Band Aid</title>-->
+<title>What is the minimum proficiency the musician should have with their instrument?</title>
 
 <div class="bg">
     <!--------------------------------------------------- Login Form --------------------------------------------------------->
@@ -9,24 +9,30 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 mx-auto shadow-border form-bg">
-                <form id="new_query_proficiency_form" method="POST">
+                <form id="new_query_proficiency_form">
                     <div class="form-group">
                         <label for="profList">What is the minimum proficiency the musician should have with their
                             instrument?</label>
-                        <select class="form-control" name="proficiency">
+                        <select class="form-control" id="profSelect">
                             {{#each proficiency}}
-                                <option value="{{proficiency_name}}">{{proficiency_name}}</option>
+                                <option value="{{proficiency_id}}">{{level}}</option>
                             {{/each}}
                         </select>
                         <br>
                     </div>
-                    <div class="form-group">
-                        <button id="submit_btn" data-id="{{qid}}" class="btn btn-default g-button">Next</button>
-                    </div>
                 </form>
+                <button id="submit_btn" class="btn btn-default g-button">Next</button>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('submit_btn').addEventListener('click', function(){
+        var profSelect = document.getElementById('profSelect').value;
+        localStorage.setItem('proficiency', profSelect);
+        window.location = '/search/q3/' + {{uid}};
+    });
+</script>
 <!--</div>-->
 <!--</html>-->
