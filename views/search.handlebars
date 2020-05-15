@@ -13,250 +13,49 @@
 
             <!--Header Text-->
             <div class="container">
-                <h1 class="text-center">Search Results</h1>
+                <h1 class="text-center">Search Results for {{instrument}} Musicians at {{zip}}</h1>
             </div>
 
             <!--New Search Button-->
             <div class="col-md-5 mx-auto form-group">
-                <a class="btn btn-block g-button" href="/search/q1/1">
+                <a class="btn btn-block g-button" href="/search/q1">
                     <i class="fa fa-google"></i> New Search
                 </a>
-            </div>    
-
-            <!--Col Headers-->
-            <div class="row" style="width:95%; margin:auto;">
-                <div class="col-">
-                </div>
-                <div class="col-xl">
-                    <div class="row">
-                        <div class="col-sm">
-                            <h3>Musician</h3>
-                        </div>
-                        <div class="col-sm">
-                            <h3>Distance</h3>
-                        </div>
-                        <div class="col-sm">
-                            <h3>Location</h3>
-                        </div>
-                        <div class="col-sm">
-                            <h3>Proficiency
-                        </div>
-                    </div>
-                </div>
             </div>
 
-            <!--Accordion wrapper-->
-            <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
-
-                <!-- Accordion card -->
-                <div class="card">
-
-                    <!-- Card header -->
-                    <div class="container">
-                        <div class="form-row align-items-center">
-                            <div class='col-'>
-                                <input type="checkbox">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Musician</th>
+                            <th scope="col">Proficiency</th>
+                            <th scope="col">Demo</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each matches}}
+                        <tr>
+                            <td>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1" >
+                                <label class="custom-control-label" for="customCheck1"></label>
                             </div>
-                            <div class="col-xl">
-                                <div class="card-header" role="tab" id="headingOne1">
-                                    <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
-                                        <div class="row">
-                                            <div class="col-sm">
-                                                <h5 class="mb-0">
-                                                <i class="fas fa-angle-down rotate-icon"></i>Dave Grohl 
-                                                </h5>
-                                            </div>
-                                            <div class="col-sm">
-                                                <h5 class="mb-0">
-                                                    <i class="fas fa-angle-down rotate-icon"></i>5 miles
-                                                </h5>
-                                            </div>
-                                            <div class="col-sm">
-                                                <h5 class="mb-0">
-                                                <i class="fas fa-angle-down rotate-icon"></i>Nashville, TN 
-                                                </h5>
-                                            </div>
-                                            <div class="col-sm">
-                                                <h5 class="mb-0">
-                                                <i class="fas fa-angle-down rotate-icon"></i>Professional 
-                                                </h5>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card body -->
-                    <div id="collapseOne1" class="collapse" role="tabpanel" aria-labelledby="headingOne1" data-parent="#accordionEx">
-                        <div class="container" style="width: 90%;">
-                            <br>
-                            <a href="">Demo reel Link</a>
-                            <br><br>
-                            <table id="instrumentTable" class="table">
-                                <thead>
-                                    <tr>
-                                    <th scope="col">Instruments</th>
-                                    <th scope="col">Proficiency</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                    <td scope="row">Drums</td>
-                                    <td>Professional</td>
-                                    </tr>
-                                    <tr>
-                                    <td scope="row">Guitar</td>
-                                    <td>Professional</td>
-                                    </tr>
-                                    <tr>
-                                    <td scope="row">Bass Guitar</td>
-                                    <td>Intermediate</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                            </td>
+                            <td>{{fname}} {{lname}}</td>
+                            <td>{{level}}</td>
+                            <td><a href="{{demo_link}}">Link</a></td>
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
                     </div>
                 </div>
-                <!-- Accordion card -->
-
-                <!-- Accordion card -->
-                <div class="card">
-
-                    <!-- Card header -->
-                    <div class="container">
-                        <div class="form-row align-items-center">
-                            <div class='col-'>
-                                <input type="checkbox">
-                            </div>
-                            <div class="col-xl">
-                                <div class="card-header" role="tab" id="headingTwo2">
-                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
-                                        <div class="row">
-                                            <div class="col-sm">
-                                                <h5 class="mb-0">
-                                                <i class="fas fa-angle-down rotate-icon"></i>Ringo Starr
-                                                </h5>
-                                            </div>
-                                            <div class="col-sm">
-                                                <h5 class="mb-0">
-                                                    <i class="fas fa-angle-down rotate-icon"></i>10 miles
-                                                </h5>
-                                            </div>
-                                            <div class="col-sm">
-                                                <h5 class="mb-0">
-                                                <i class="fas fa-angle-down rotate-icon"></i>Liverpool, UK
-                                                </h5>
-                                            </div>
-                                            <div class="col-sm">
-                                                <h5 class="mb-0">
-                                                <i class="fas fa-angle-down rotate-icon"></i>Legend 
-                                                </h5>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card body -->
-                    <div id="collapseTwo2" class="collapse" role="tabpanel" aria-labelledby="headingTwo2" data-parent="#accordionEx">
-                        <div class="container" style="width: 90%;">
-                            <br>
-                            <a href="">Demo reel Link</a>
-                            <br><br>
-                            <table id="instrumentTable" class="table">
-                                <thead>
-                                    <tr>
-                                    <th scope="col">Instruments</th>
-                                    <th scope="col">Proficiency</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                    <td scope="row">Drums</td>
-                                    <td>Legend</td>
-                                    </tr>
-                                    <tr>
-                                    <td scope="row">Vocals</td>
-                                    <td>Legend</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
                 </div>
-                <!-- Accordion card -->
 
-                <!-- Accordion card -->
-                <div class="card">
-
-                    <!-- Card header -->
-                    <div class="container">
-                        <div class="form-row align-items-center">
-                            <div class='col-'>
-                                <input type="checkbox">
-                            </div>
-                            <div class="col-xl">
-                                <div class="card-header" role="tab" id="headingThree3">
-                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseThree3" aria-expanded="false" aria-controls="collapseThree3">
-                                        <div class="row">
-                                            <div class="col-sm">
-                                                <h5 class="mb-0">
-                                                <i class="fas fa-angle-down rotate-icon"></i>Your dorm neighbor
-                                                </h5>
-                                            </div>
-                                            <div class="col-sm">
-                                                <h5 class="mb-0">
-                                                    <i class="fas fa-angle-down rotate-icon"></i>10 miles
-                                                </h5>
-                                            </div>
-                                            <div class="col-sm">
-                                                <h5 class="mb-0">
-                                                <i class="fas fa-angle-down rotate-icon"></i>Upstairs
-                                                </h5>
-                                            </div>
-                                            <div class="col-sm">
-                                                <h5 class="mb-0">
-                                                <i class="fas fa-angle-down rotate-icon"></i>Amatuer 
-                                                </h5>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card body -->
-                    <div id="collapseThree3" class="collapse" role="tabpanel" aria-labelledby="headingThree3" data-parent="#accordionEx">
-                        <div class="container" style="width: 90%;">
-                            <br>
-                            <a href="">Demo reel Link</a>
-                            <br><br>
-                            <table id="instrumentTable" class="table">
-                                <thead>
-                                    <tr>
-                                    <th scope="col">Instruments</th>
-                                    <th scope="col">Proficiency</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                    <td scope="row">Drums</td>
-                                    <td>Amateur</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <!-- Accordion card -->
-
-            </div>
-            <!-- Accordion wrapper -->
+            
 
             <br>                    
             <div class="col-md-5 mx-auto form-group">

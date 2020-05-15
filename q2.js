@@ -5,7 +5,7 @@ module.exports = function(){
     function getProficiencies(res, mysql, context, complete){
 
         // Construct query--------------------------------------------------------------
-        let sql = "SELECT proficiency_name FROM Proficiency";
+        let sql = "SELECT name FROM Proficiency";
         // Query and store results------------------------------------------------------
         mysql.pool.query(sql, function(error, results){
             if(error){
