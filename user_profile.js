@@ -84,7 +84,7 @@ module.exports = function(){
 
 //----------------------------------- get and display single user for editing ------------------------------------------
 
-    router.get('/edit/:id',function(req,res) {
+    router.get('/edit/:id',redirectLogin, function(req,res) {
         var callbackCount = 0;
         var context = {};
         context.jsscripts = ["edit_user_profile.js","delete_user_profile.js"];
@@ -103,7 +103,7 @@ module.exports = function(){
 
 //----------------------------------- change password page ####not functioning yet######--------------------------------
 
-    router.get('/edit/password/:id',function(req,res) {
+    router.get('/edit/password/:id', redirectLogin, function(req,res) {
         var callbackCount = 0;
         var context = {};
         context.jsscripts = ["edit_user_profile.js","delete_user_profile.js"];

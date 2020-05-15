@@ -10,6 +10,7 @@
   "author": "Team 1",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^4.0.1",
     "body-parser": "^1.13.3",
     "connect-flash": "^0.1.1",
     "express": "^4.13.2",
