@@ -1,4 +1,4 @@
---- Team Band Aid Database Definitions
+--- Team Band Aid Database Definitions - Revised
 
 --- User Entity
 CREATE TABLE Users(
@@ -10,9 +10,10 @@ CREATE TABLE Users(
     fname VARCHAR(25) NOT NULL,
     lname VARCHAR(25) NOT NULL,
     phone INT,
-    social VARCHAR(100),
+    social VARCHAR(255),
     zip INT NOT NULL,
     lfg BOOLEAN NOT NULL,
+    demo_link VARCHAR(255)
     PRIMARY KEY(user_id)
 );
 
@@ -75,20 +76,20 @@ ON DELETE CASCADE;
 -- SAMPLE DATA
 ------------------------------------------------------------------
 
-INSERT INTO Users (email, password, fname, lname, phone, zip, lfg)
-VALUES ('user1@gmail.com', 'password', 'Bob', 'Jones', '123456789','60523', 1);
+INSERT INTO Users (email, password, fname, lname, phone, zip, lfg, social, demo_link, proficiency_id, instrument_id)
+VALUES ('user1@gmail.com', 'password', 'Bob', 'Jones', '123456789','60523', 1, 'https://www.facebook.com/', 'https://soundcloud.com/', 2, 1);
 
 INSERT INTO Users (email, password, fname, lname, phone, zip, lfg)
-VALUES ('user2@gmail.com', 'password2', 'Dave', 'Jones', '123456789','99999', 1);
+VALUES ('user2@gmail.com', 'password2', 'Dave', 'Jones', '123456789','99999', 1, 'https://www.facebook.com/', 'https://soundcloud.com/', 2, 1);
 
 INSERT INTO Users (email, password, fname, lname, phone, zip, lfg)
-VALUES ('user3@gmail.com', 'password3', 'Betty', 'Bop', '123456789','11111', 0);
+VALUES ('user3@gmail.com', 'password3', 'Betty', 'Bop', '123456789','11111', 0, 'https://www.facebook.com/', 'https://soundcloud.com/', 4, 1);
 
 INSERT INTO Users (email, password, fname, lname, phone, zip, lfg)
-VALUES ('user4@gmail.com', 'password4', 'Mike', 'Mustache', '123456789','60523', 1);
+VALUES ('user4@gmail.com', 'password4', 'Mike', 'Mustache', '123456789','60523', 1, 'https://www.facebook.com/', 'https://soundcloud.com/', 3, 3);
 
 INSERT INTO Users (email, password, fname, lname, phone, zip, lfg)
-VALUES ('user5@gmail.com', 'password5', 'Sally', 'Sandal', '123456789','99999', 1);
+VALUES ('user5@gmail.com', 'password5', 'Sally', 'Sandal', '123456789','99999', 1, 'https://www.facebook.com/', 'https://soundcloud.com/', 5, 4);
 
 
 
@@ -109,19 +110,19 @@ VALUES ('Keytar');
 
 
 
-INSERT INTO Instruments (name)
+INSERT INTO Proficiencies (name)
 VALUES ('Amatuer');
 
-INSERT INTO Instruments (name)
+INSERT INTO Proficiencies (name)
 VALUES ('Intermediate');
 
-INSERT INTO Instruments (name)
+INSERT INTO Proficiencies (name)
 VALUES ('Expert');
 
-INSERT INTO Instruments (name)
+INSERT INTO Proficiencies (name)
 VALUES ('Master');
 
-INSERT INTO Instruments (name)
+INSERT INTO Proficiencies (name)
 VALUES ('Professional');
 
 
