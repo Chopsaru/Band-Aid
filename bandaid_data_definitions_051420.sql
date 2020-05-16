@@ -36,7 +36,7 @@ CREATE TABLE Messages(
     msg_id INT AUTO_INCREMENT NOT NULL,
     header VARCHAR(200),
     body VARCHAR(500),
-    responsed BOOLEAN,
+    responded BOOLEAN,
     PRIMARY KEY(msg_id)
 );
 
@@ -49,13 +49,13 @@ CREATE TABLE Users_Messages(
 
 ALTER TABLE Users
 ADD CONSTRAINT fk_user_1
-FOREIGN KEY (instrument_id) 
+FOREIGN KEY (instrument_id)
 REFERENCES Instruments(instrument_id)
 ON DELETE CASCADE;
 
 ALTER TABLE Users
 ADD CONSTRAINT fk_user_2
-FOREIGN KEY (proficiency_id) 
+FOREIGN KEY (proficiency_id)
 REFERENCES Proficiencies(proficiency_id)
 ON DELETE CASCADE;
 
@@ -108,19 +108,19 @@ VALUES ('Master');
 INSERT INTO Proficiencies (level)
 VALUES ('Professional');
 
-INSERT INTO Messages (header, body, responsed)
+INSERT INTO Messages (header, body, responded)
 VALUES ('Looking for guitarists', 'Must be okayish', '0');
 
-INSERT INTO Messages (header, body, responsed)
+INSERT INTO Messages (header, body, responded)
 VALUES ('Looking for vocalists', 'Payment through exposure', '1');
 
-INSERT INTO Messages (header, body, responsed)
+INSERT INTO Messages (header, body, responded)
 VALUES ('Looking for pianists', 'Please teach me for free', '0');
 
-INSERT INTO Messages (header, body, responsed)
+INSERT INTO Messages (header, body, responded)
 VALUES ('Looking for drummers', 'Eating chicken doesnt count', '0');
 
-INSERT INTO Messages (header, body, responsed)
+INSERT INTO Messages (header, body, responded)
 VALUES ('Looking for keytarists', 'Do you exist?', '0');
 
 

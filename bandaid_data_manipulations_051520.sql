@@ -11,7 +11,7 @@ SELECT  instrument_id,
         zip,
         lfg,
         demo_link
-FROM    Users 
+FROM    Users
 WHERE   user_id = :user_id;
 
 --- ADD
@@ -41,7 +41,7 @@ WHERE user_id = :user_id;
 --- READ
 SELECT  name,
         level
-FROM    Instruments 
+FROM    Instruments
 WHERE   instrument_id = :instrument_id;
 
 --- ADD
@@ -62,7 +62,7 @@ WHERE instrument_id = :instrument_id;
 
 --- READ
 SELECT  level
-FROM    Proficiencies 
+FROM    Proficiencies
 WHERE   proficiency_id = :proficiency_id;
 
 --- ADD
@@ -83,12 +83,12 @@ WHERE proficiency_id = :proficiency_id;
 --- READ
 SELECT  header,
         body,
-        responsed
-FROM    Messages 
+        responded
+FROM    Messages
 WHERE   msg_id = :msg_id;
 
 --- ADD
-INSERT INTO Messages (header, body, responsed)
+INSERT INTO Messages (header, body, responded)
 VALUES ('header_input', 'body_input', 'response_input');
 
 --- DELETE
@@ -98,7 +98,7 @@ DELETE FROM Messages WHERE msg_id = :msg_id;
 UPDATE Messages
 SET     header = 'header_input',
         body = 'body_input',
-        responsed = 'response_input'
+        responded = 'response_input'
 WHERE msg_id = :msg_id;
 
 
@@ -107,7 +107,7 @@ WHERE msg_id = :msg_id;
 --- READ
 SELECT  user_id,
         msg_id
-FROM    Users_Messages 
+FROM    Users_Messages
 WHERE   msg_id = :msg_id;
 
 --- ADD
