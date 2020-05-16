@@ -6,9 +6,8 @@ const handlebars = require('express-handlebars').create({defaultLayout:'main'});
 const bodyParser = require('body-parser');
 const ip = require('ip');
 
-// cookie time
+// cookie lifetime
 const TWO_HOURS = 1000 * 60 * 60 * 2
-
 
 // env variables
 const{
@@ -20,13 +19,10 @@ const{
 const IN_PROD = NODE_ENV === 'production'
 
 
-
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 app.set('port', 5000);
 app.set('mysql', mysql);
-
-// middleware functions
 
 // expression-session configuration
 app.use(session({

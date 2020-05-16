@@ -1,6 +1,7 @@
 module.exports = function(){
     var express = require('express');
     var router = express.Router();
+    const bcrypt = require('bcrypt')
 
 //----------------------------------------------- session handlers -----------------------------------------------------
     // handles user if not signed in
@@ -48,10 +49,14 @@ module.exports = function(){
             var id = results[0].id;
             var dbEmail = results[0].dbEmail;
 
+
+
             console.log(dbPass);
             console.log(dbEmail)
             console.log(id);
-
+            // hash password for security
+            const hashedPassword = bcrypt.hash(req.body.password, 10)
+            console.log(hashedPassword);
             // Work on matching here to validate min 26 in video
             if(req.body.email === dbEmail && req.body.password === dbPass) {
                 req.session.userId = id;

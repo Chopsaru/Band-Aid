@@ -3,8 +3,8 @@
 
 <!--------------------------------------------------- Profile --------------------------------------------------------->
 <!-- credit - https://bootsnipp.com/snippets/K0ZmK -->
-
-<<div class="container emp-profile">
+</br>
+<div class="container emp-profile">
     <form method="post">
         <div class="row">
             <div class="col-md-4">
@@ -24,7 +24,7 @@
                     <h6>
                         {{user_profile.zip}}
                     </h6>
-                    <p class="proile-rating">Skill Level : <span>Professional</span></p> <!--Need to replace with new DB----->
+                    <p class="proile-rating">Skill Level : <span>{{user_profile.insProficiency}}</span></p> <!--Need to replace with new DB----->
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">User Profile</a>
@@ -64,7 +64,7 @@
                                 <label>Primary Instrument</label>
                             </div>
                             <div class="col-md-6">
-                                <p>NEED TO ADD INSRUMENT</p>
+                                <p>{{user_profile.insName}}</p>
                             </div>
                         </div>
                         <div class="row">
@@ -72,7 +72,7 @@
                                 <label>Looking for</label>
                             </div>
                             <div class="col-md-6">
-                                <p>BOOL YES NO</p>
+                                <p>{{user_profile.lfg}}</p>
                             </div>
                         </div>
                         <div class="row">
@@ -92,7 +92,11 @@
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </form>
+    </br>
+    </br>
+    <input type="button" value="Search" class="btn btn-block g-button" onclick="window.location.href='/search/{{user_profile.id}}'">
 </div>
