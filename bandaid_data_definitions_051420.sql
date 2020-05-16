@@ -9,7 +9,7 @@ CREATE TABLE Users(
     password VARCHAR(20) NOT NULL,
     fname VARCHAR(25) NOT NULL,
     lname VARCHAR(25) NOT NULL,
-    phone INT,
+    phone BIGINT(11),
     social VARCHAR(255),
     zip INT NOT NULL,
     lfg BOOLEAN NOT NULL,

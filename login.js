@@ -31,7 +31,7 @@ module.exports = function(){
     });
 
     // login verification and session set up
-    router.post('/',function(req,res) {
+    router.post('/', function(req,res) {
         //console.log(req.session)
         //console.log(req.body);
         //console.log(req.body.email)
@@ -40,7 +40,7 @@ module.exports = function(){
         var mysql = req.app.get('mysql');
         var inserts = [req.body.email];
 
-        mysql.pool.query("SELECT user_id as id, email as dbEmail, password as dbPassword FROM Users WHERE email = ?", inserts, function(error, results){
+        mysql.pool.query("SELECT user_id as id, email as dbEmail, password as dbPassword FROM Users WHERE email = ?", inserts, async function(error, results){
             if(error){
                res.write(JSON.stringify(error));
                res.end();
@@ -55,14 +55,14 @@ module.exports = function(){
             console.log(dbEmail)
             console.log(id);
             // hash password for security
-            const hashedPassword = bcrypt.hash(req.body.password, 10)
-            console.log(hashedPassword);
+            const passwordMatched = await bcrypt.compare(req.body.password, dbPass);
             // Work on matching here to validate min 26 in video
-            if(req.body.email === dbEmail && req.body.password === dbPass) {
+            if(req.body.email === dbEmail && passwordMatched) {
                 req.session.userId = id;
                 return res.redirect('/user_profile/' + req.session.userId);
+            }else{
+                res.redirect('/login');
             }
-            res.redirect('/login');
         });
 
     });
