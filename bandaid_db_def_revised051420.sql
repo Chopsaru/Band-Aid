@@ -1,4 +1,4 @@
---- Team Band Aid Database Definitions
+--- Team Band Aid Database Definitions 5/14/20
 
 --- User Entity
 CREATE TABLE Users(
