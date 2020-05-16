@@ -3,9 +3,9 @@ module.exports = function(){
     var router = express.Router();
 
     //show home page
-    router.get('/',function(req,res) {
-        res.render('home')
+    router.get('/', function(req,res) {
+        res.render('home');
     });
-    /// comment
+
     return router;
 }();

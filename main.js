@@ -1,29 +1,50 @@
-/*********************************************************************************
- ** Program Name:	main.js
- ** Authors:		Team Band Aid
- ** Date:		    5/9/2020
- ** Description:	js to run Band Aid Home Page
- *******************************************************************************/
+const express = require('express');
+const session = require('express-session')
+const mysql = require('./dbcon.js');
+const app = express();
+const handlebars = require('express-handlebars').create({defaultLayout:'main'});
+const bodyParser = require('body-parser');
+const ip = require('ip');
 
-var express = require('express');
-var mysql = require('./dbcon.js');
-var app = express();
-var handlebars = require('express-handlebars').create({defaultLayout:'main'});
-var bodyParser = require('body-parser');
-var ip = require('ip');
+// cookie lifetime
+const TWO_HOURS = 1000 * 60 * 60 * 2
+
+// env variables
+const{
+    NODE_ENV = 'development',
+    SESSION_NAME = 'sid',
+    SESSION_SECRET = 'super-secret-code',
+    SESSION_LIFETIME = TWO_HOURS
+}= process.env
+const IN_PROD = NODE_ENV === 'production'
+
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 app.set('port', 5000);
+app.set('mysql', mysql);
 
-app.use('/modules', express.static('node_modules'));
+// expression-session configuration
+app.use(session({
+    name: SESSION_NAME,
+    resave: false,
+    saveUninitialized: false,
+    secret: SESSION_SECRET,
+    cookie: {
+        maxAge: SESSION_LIFETIME,
+        sameSite: true,
+        secure: IN_PROD,                // look into mysql session store
+    }
+}))
 
+// body parser
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
-app.set('mysql', mysql);
-
+// point at public directory folder
 app.use('/', express.static('public'));
+
+// pages in site
 app.use('/', require('./home.js'));
 app.use('/login', require('./login.js'));
 app.use('/sign_up', require('./sign_up.js'));
@@ -33,6 +54,7 @@ app.use('/search/q1', require('./q1.js'));
 app.use('/search/q2', require('./q2.js'));
 app.use('/search/q3', require('./q3.js'));
 
+// error handling
 app.use(function(req,res){
     res.status(404);
     res.render('404');
@@ -45,6 +67,7 @@ app.use(function(err, req, res, next){
     res.render('500');
 });
 
+// node start up
 app.listen(app.get('port'), function(){
     console.log(ip.address());
     console.log(`Express started on http://${ip.address()}:5000/` +  '; press Ctrl-C to terminate.');

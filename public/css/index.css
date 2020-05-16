@@ -15,6 +15,11 @@ body, html {
     background-size: cover;
 }
 
+.wv-heading--title {
+font-size: 40px;
+}
+
+
 .send-button{
     background: #36c731;
     width:100%;

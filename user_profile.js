@@ -4,14 +4,37 @@ module.exports = function(){
     var express = require('express');
     var router = express.Router();
 
+//----------------------------------------------- session handlers -----------------------------------------------------
+    // handles user if not signed in
+    const redirectLogin = (req, res, next) =>{
+        if(!req.session.userId){
+            res.redirect('/login')
+        } else {
+            next()
+        }
+    }
+
+// handles user if signed in
+    const redirectUser_Profile = (req, res, next) =>{
+        if(req.session.userId){
+            res.redirect('/user_profile/' + req.session)
+        } else {
+            next()
+        }
+    }
+
 //--------------------------------------- get single user profile data -------------------------------------------------
 
     function getUserProfile(res, mysql, context, id, complete){
 
         // Construct query--------------------------------------------------------------
-        var sql = "SELECT user_id as id, query_id, musician_id, email, fname, lname, phone, social, zip FROM Users WHERE user_id = ?";
+        var sql = "SELECT user_id as id, fname, lname, name as insName, level as insProficiency, email, password, phone, social, zip, lfg, demo_link\n" +
+            "FROM users\n" +
+            "INNER JOIN instruments\n" +
+            "ON users.instrument_id = instruments.instrument_id\n" +
+            "INNER JOIN proficiencies \n" +
+            "ON users.proficiency_id = proficiencies.proficiency_id WHERE user_id = ?";
         var inserts = [id];
-        console.log("made it past query")
         // Query and store results------------------------------------------------------
         mysql.pool.query(sql, inserts, function(error, results){
             if(error){
@@ -23,51 +46,53 @@ module.exports = function(){
         });
     }
 
-//-------------------------------------------- get musician data -------------------------------------------------------
-    function getInstruments(res, mysql, context, id, complete){
-        var inserts = [id]
-        mysql.pool.query("SELECT fname, lname, name as insName, proficiency as insProficiency \n" +
-            "FROM users \n" +
-            "INNER JOIN\tmusicians\n" +
-            "ON users.musician_id = musicians.musician_id\n" +
-            "INNER JOIN instruments\n" +
-            "ON musicians.instrument_id = instruments.instrument_id\n" +
-            "WHERE user_id = ?", inserts,function(error, results){
+//--------------------------------------- get single user profile data -------------------------------------------------
+
+    function getInstruments(res, mysql, context, complete){
+
+            mysql.pool.query("SELECT instrument_id as id, name as insName FROM instruments",function(error, results){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.instruments  = results;
+            context.instruments = results;
+            console.log(results);
             complete();
         });
     }
 
-//------------------------------------------ get single user id --------------------------------------------------------
+//--------------------------------------- get single user profile data -------------------------------------------------
 
-    function getUserID(res, mysql, context, complete) {
-        var sql = "SELECT DISTINCT user_id,......";
+    function getProficiency(res, mysql, context, complete){
 
-        mysql.pool.query(sql, function(error, results, fields){
+        // Construct query--------------------------------------------------------------
+        var sql = "SELECT proficiency_id as id, level as insProficiency FROM proficiencies";
+        // Query and store results------------------------------------------------------
+        mysql.pool.query(sql, function(error, results){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.user_id = results;
+            context.proficiencies = results;
             complete();
         });
     }
 
 //------------------------------------------ get and display single user -----------------------------------------------
 
-    router.get('/:id',function(req,res) {
+    router.get('/:id', redirectLogin, function(req,res) {
+        console.log(req.session);
+        console.log(req.session.userId);
+
         var callbackCount = 0;
         var context = {};
         context.jsscripts = ["edit_user_profile.js","delete_user_profile.js"];
         var mysql = req.app.get('mysql');
 
-        getUserProfile(res, mysql, context, req.params.id, complete);
-        //getUserID(res, mysql,context,complete);
+        // get all data for update
+        getUserProfile(res, mysql, context, req.session.userId, complete);
 
+        console.log("Made it back to redirect")
         function complete(){
             callbackCount++;
             if(callbackCount >= 1){
@@ -78,18 +103,25 @@ module.exports = function(){
 
 //----------------------------------- get and display single user for editing ------------------------------------------
 
-    router.get('/edit/:id',function(req,res) {
+    router.get('/edit/:id',redirectLogin, function(req,res) {
+        console.log(req.session);
+        console.log(req.session.userId);
+
         var callbackCount = 0;
         var context = {};
         context.jsscripts = ["edit_user_profile.js","delete_user_profile.js"];
         var mysql = req.app.get('mysql');
 
+        // get all data for update
         getUserProfile(res, mysql, context, req.params.id, complete);
-        getInstruments(res, mysql, context, req.params.id, complete);
+        // get instruments to select from
+        getInstruments(res, mysql, context, complete);
+        // get instruments to select from
+        getProficiency(res, mysql, context, complete);
 
         function complete(){
             callbackCount++;
-            if(callbackCount >= 2){
+            if(callbackCount >= 3){
                 res.render('edit_user_profile', context);
             }
         }
@@ -97,7 +129,7 @@ module.exports = function(){
 
 //----------------------------------- change password page ####not functioning yet######--------------------------------
 
-    router.get('/edit/password/:id',function(req,res) {
+    router.get('/edit/password/:id', redirectLogin, function(req,res) {
         var callbackCount = 0;
         var context = {};
         context.jsscripts = ["edit_user_profile.js","delete_user_profile.js"];
