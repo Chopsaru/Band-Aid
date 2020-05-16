@@ -57,7 +57,6 @@ app.use('/search', require('./search.js'));
 app.use('/search/q1', require('./q1.js'));
 app.use('/search/q2', require('./q2.js'));
 app.use('/search/q3', require('./q3.js'));
-app.use('/search/q4', require('./q4.js'));
 
 // error handling
 app.use(function(req,res){

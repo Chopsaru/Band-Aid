@@ -1,5 +1,5 @@
 ﻿<!--<link rel="stylesheet" href="/css/index.css">-->
-<!--<title>Login into Band Aid</title>-->
+<title>What zip code should the Musician be based out of?</title>
 
 <div class="bg">
     <!--------------------------------------------------- Login Form --------------------------------------------------------->
@@ -8,23 +8,32 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 mx-auto shadow-border form-bg">
-                <form id="new_query_location_form" method="POST">
+                <form id="zipForm">
                     <div class="form-group">
-                        <label for="radiusList">What is the maximum distance away the musician should be?</label>
-                        <select class="form-control" name="zip_code">
-                            {{#each zipcodes}}
-                                <option value="{{zip_code}}">{{zip_code}}</option>
-                            {{/each}}
-                        </select>
+                        <label for="zipInput">What zip code should the Musician be based out of?</label>
+                        <input type "number" minlength="5" manlength="5" class="form-control" id="zipInput" rows="1"></input>
                         <br>
                     </div>
-                    <div class="form-group">
-                        <button id="submit_btn" data-id="{{qid}}" class="btn btn-default g-button">Next</button>
-                    </div>
                 </form>
+                <div class="form-group">
+                        <button id="submit_btn" class="btn btn-default send-button">Next</button>
+                    </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    
+
+    document.getElementById('submit_btn').addEventListener('click', function(){
+        var zipInput = document.getElementById('zipInput').value;
+        localStorage.setItem('zip', zipInput);
+        var localInst = localStorage.getItem('instrument');
+        var localProf = localStorage.getItem('proficiency');
+        var localZip = localStorage.getItem('zip');
+        window.location = '/search/' + {{uid}} + '?instrument=' + localInst + '&proficiency=' + localProf + '&zip=' + localZip;
+    });
+</script>
 <!--</div>-->
 <!--</html>-->
