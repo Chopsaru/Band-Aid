@@ -9,7 +9,7 @@ module.exports = function(){
                             FROM Users \
                             LEFT JOIN Instruments ON Users.instrument_id = Instruments.instrument_id\
                             LEFT JOIN Proficiencies ON Users.proficiency_id = Proficiencies.proficiency_id\
-                            WHERE lfg = 1 AND zip = ? AND Proficiencies.proficiency_id >= ? AND Instruments.name = ?;"
+                            WHERE lfg = 1 AND LEFT(zip, 2) = LEFT(?, 2) AND Proficiencies.proficiency_id >= ? AND Instruments.name = ?;"
             inserts = [context.zip, context.proficiency, context.instrument];
 
             // Query and store results------------------------------------------------------
@@ -17,7 +17,7 @@ module.exports = function(){
             FROM Users \
             LEFT JOIN Instruments ON Users.instrument_id = Instruments.instrument_id\
             LEFT JOIN Proficiencies ON Users.proficiency_id = Proficiencies.proficiency_id\
-            WHERE lfg = 1 AND zip = " + context.zip + " AND Proficiencies.proficiency_id >= "+ context.proficiency + " AND Instruments.name = " + context.instrument + ";")
+            WHERE lfg = 1 AND LEFT(zip, 2) = LEFT(" + context.zip + ", 2) AND Proficiencies.proficiency_id >= "+ context.proficiency + " AND Instruments.name = " + context.instrument + ";")
             mysql.pool.query(sql, inserts, function(error, results){
                 if(error){
                     res.write(JSON.stringify(error));
