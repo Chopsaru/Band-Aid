@@ -12,9 +12,15 @@
         <div class="col-md-12 mx-auto shadow-border form-bg">
 
             <!--Header Text-->
+            {{#if matches}}
             <div class="container">
                 <h1 class="text-center">Search Results for {{instrument}} Musicians at {{zip}}</h1>
             </div>
+            {{else}}
+            <div class="container">
+                <h1 class="text-center">Search Results</h1>
+            </div>
+            {{/if}}
 
             <!--New Search Button-->
             <div class="col-md-5 mx-auto form-group">
@@ -33,6 +39,7 @@
                             <th scope="col"></th>
                             <th scope="col">Musician</th>
                             <th scope="col">Proficiency</th>
+                            <th scope="col">Location</th>
                             <th scope="col">Demo</th>
                         </tr>
                         </thead>
@@ -48,6 +55,7 @@
                             </td>
                             <td>{{fname}} {{lname}}</td>
                             <td>{{level}}</td>
+                            <td>{{zip}}</td>
                             <td><a href="{{demo_link}}">Link</a></td>
                         </tr>
                         {{/each}}
