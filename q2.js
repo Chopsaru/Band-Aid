@@ -2,6 +2,16 @@ module.exports = function(){
     var express = require('express');
     var router = express.Router();
 
+//----------------------------------------------- session handlers -----------------------------------------------------
+    // handles user if not signed in
+    const redirectLogin = (req, res, next) =>{
+        if(!req.session.userId){
+            res.redirect('/login')
+        } else {
+            next()
+        }
+    }
+
     function getProficiencies(res, mysql, context, complete){
 
         // Construct query--------------------------------------------------------------
@@ -19,7 +29,7 @@ module.exports = function(){
     }
 
     //show page
-    router.get('/:uid',function(req,res) {
+    router.get('/:uid',redirectLogin,function(req,res) {
         var callbackCount = 0;
         var context = {};
         var mysql = req.app.get('mysql');

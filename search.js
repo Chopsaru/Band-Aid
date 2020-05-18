@@ -2,6 +2,16 @@ module.exports = function(){
     let express = require('express');
     let router = express.Router();
 
+//----------------------------------------------- session handlers -----------------------------------------------------
+    // handles user if not signed in
+    const redirectLogin = (req, res, next) =>{
+        if(!req.session.userId){
+            res.redirect('/login')
+        } else {
+            next()
+        }
+    }
+
     function getMatchingMusicians(res, req, mysql, context, complete){
         //get query rows with matching userid
             // Construct query--------------------------------------------------------------
@@ -32,7 +42,7 @@ module.exports = function(){
     }
 
     //show page
-    router.get('/:uid',function(req,res) {
+    router.get('/:uid',redirectLogin,function(req,res) {
         let callbackCount = 0;
         let context = {};
         let mysql = req.app.get('mysql');
