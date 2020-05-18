@@ -42,15 +42,13 @@ module.exports = function(){
 
         mysql.pool.query("SELECT user_id as id, email as dbEmail, password as dbPassword FROM Users WHERE email = ?", inserts, async function(error, results){
             if(error){
+                // pop up window to say password invalid
                res.write(JSON.stringify(error));
                res.end();
             }
             var dbPass = results[0].dbPassword;
             var id = results[0].id;
             var dbEmail = results[0].dbEmail;
-
-
-
             console.log(dbPass);
             console.log(dbEmail)
             console.log(id);

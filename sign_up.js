@@ -80,7 +80,7 @@ module.exports = function(){
             mysql.pool.query("INSERT INTO Users(instrument_id, proficiency_id, email, password, fname, lname," +
                 "phone, social, zip, lfg, demo_link) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
                 [req.body.insName, req.body.proficiency, req.body.email, hashedPassword, req.body.fname,
-                    req.body.lname, req.body.phone, req.body.social, req.body.zip, 1, req.body.lfg], function (error) {
+                    req.body.lname, req.body.phone, req.body.social, req.body.zip, 1, req.body.demo_link], function (error) {
                     if (error) {
                         console.log(JSON.stringify(error))
                         res.write(JSON.stringify(error));

@@ -168,18 +168,15 @@ module.exports = function(){
 
 //--------------------------------------------- delete user profiles ---------------------------------------------------
         router.delete('/:id', function(req, res){
-            console.log("Made it to delete function")
             var mysql = req.app.get('mysql');
-            var sql = "DELETE FROM Users WHERE user_id = ?";
-            var inserts = [req.params.id];
-            sql = mysql.pool.query(sql, inserts, function(error){
+            mysql.pool.query("DELETE FROM Users WHERE user_id = ?", req.params.id, function(error){
                 if(error){
-                    console.log(error)
                     res.write(JSON.stringify(error));
                     res.status(400);
                     res.end();
                 }else{
                     res.status(202).end();
+                    req.session.destroy();
                 }
             })
         });
