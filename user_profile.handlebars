@@ -1,0 +1,145 @@
+﻿<link rel="stylesheet" href = "/css/user_profile.css">
+<title>Sign up for Band Aid</title>
+
+<!--------------------------------------------------- Profile --------------------------------------------------------->
+<!-- credit - https://bootsnipp.com/snippets/K0ZmK -->
+
+<<div class="container emp-profile">
+    <form method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img src="/images/spencer_sample.JPG"/>
+                    <div class="file btn btn-lg btn-primary">
+                        Change Photo
+                        <input type="file" name="file"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5>
+                        First Name: {{user_profile.fname}}, Last Name: {{user_profile.lname}}
+                    </h5>
+                    <h6>
+                        Hollywood, CA
+                    </h6>
+                    <p class="proile-rating">Skill Level : <span>Professional</span></p>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" >Inbox <span class="badge badge-danger">5</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <a class="profile-edit-btn" href="/user_profile/edit/{{user_profile.id}}">Edit/Delete Profile</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                    <p>Social Media</p>
+                    <a href="https://www.facebook.com/eddievanhalen">Facebook</a><br/>
+                    <a href="https://www.instagram.com/EddieVanHalen/">Instagram</a><br/>
+                    <a href="https://www.youtube.com/watch?v=sI7XiJgt0vY">Sample Music</a>
+                    <p>Other Instruments</p>
+                    <a href="">Banjo</a><br/>
+                    <a href="">Steel Guitar</a><br/>
+                    <a href="">Mandolin</a><br/>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="inbox_body">
+                            <div class="row form-bg in_title id="inbox_header" ">
+                                <h3 >
+                                    Inbox
+                                </h3>
+
+                            </div>
+                            <div class="inbox_tabs row">
+
+                                <ul class="col-md-6 " id="msg_nav" style="list-style: none;">
+                                    <li class="tab1"><a class="inbox_button" href="#">Recieved</a></li>
+                                    <li class="tab2"><a class="inbox_button" href="#">Sent</a></li>
+                                    <li class="tab3"><a class="inbox_button" href="#">Pending</a></li>
+                                </ul>
+
+                                <div class="col-md-6">
+                                    <section>
+                                        <div class="tab1">
+
+                                        </div>
+                                        <div class="tab2">
+
+                                        </div>
+                                        <div class="tab3">
+
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                       </div>
+
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Primary Instrument</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Guitar</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Looking for</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Paid Gig</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Preferred Genre</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>80's Metal</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Email</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>eddieSlays@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Phone</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>867-5309</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Band Info</label><br/>
+                                <p>Van Halen</p>
+                                <p>Inspired by Jimi Hendrix</p>
+                                <p>We used to pack stadiums... now we are rocking grandpas!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </form>
+</div>
