@@ -29,11 +29,11 @@ module.exports = function(){
 
         // Construct query--------------------------------------------------------------
         var sql = "SELECT user_id as id, fname, lname, name as insName, level as insProficiency, email, password, phone, social, zip, lfg, demo_link\n" +
-            "FROM users\n" +
-            "INNER JOIN instruments\n" +
-            "ON users.instrument_id = instruments.instrument_id\n" +
-            "INNER JOIN proficiencies \n" +
-            "ON users.proficiency_id = proficiencies.proficiency_id WHERE user_id = ?";
+            "FROM Users\n" +
+            "INNER JOIN Instruments\n" +
+            "ON Users.instrument_id = Instruments.instrument_id\n" +
+            "INNER JOIN Proficiencies \n" +
+            "ON Users.proficiency_id = Proficiencies.proficiency_id WHERE user_id = ?";
         var inserts = [id];
         // Query and store results------------------------------------------------------
         mysql.pool.query(sql, inserts, function(error, results){
@@ -50,7 +50,7 @@ module.exports = function(){
 
     function getInstruments(res, mysql, context, complete){
 
-            mysql.pool.query("SELECT instrument_id as id, name as insName FROM instruments",function(error, results){
+            mysql.pool.query("SELECT instrument_id as id, name as insName FROM Instruments",function(error, results){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -66,7 +66,7 @@ module.exports = function(){
     function getProficiency(res, mysql, context, complete){
 
         // Construct query--------------------------------------------------------------
-        var sql = "SELECT proficiency_id as id, level as insProficiency FROM proficiencies";
+        var sql = "SELECT proficiency_id as id, level as insProficiency FROM Proficiencies";
         // Query and store results------------------------------------------------------
         mysql.pool.query(sql, function(error, results){
             if(error){
