@@ -46,7 +46,26 @@ module.exports = function(){
         });
     }
 
-//--------------------------------------- get single user profile data -------------------------------------------------
+//--------------------------------------- get user messages -------------------------------------------------
+
+    function getMessages(res, mysql, context, id, complete){
+
+        var sql = "SELECT * from Messages WHERE inbox_id = ?";
+        var inserts = [id];
+        console.log("SELECT * from Messages WHERE inbox_id = ? " + id);
+        // Query and store results------------------------------------------------------
+        mysql.pool.query(sql, inserts, function(error, results){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            console.log(results)
+            context.messages = results;
+            complete();
+        });
+    }
+
+//--------------------------------------- get list of instruments -------------------------------------------------
 
     function getInstruments(res, mysql, context, complete){
 
@@ -61,7 +80,7 @@ module.exports = function(){
         });
     }
 
-//--------------------------------------- get single user profile data -------------------------------------------------
+//--------------------------------------- get list of proficiencies -------------------------------------------------
 
     function getProficiency(res, mysql, context, complete){
 
@@ -91,11 +110,13 @@ module.exports = function(){
 
         // get all data for update
         getUserProfile(res, mysql, context, req.session.userId, complete);
+        // get all messages where id matches
+        getMessages(res, mysql, context, req.params.id, complete);
 
         console.log("Made it back to redirect")
         function complete(){
             callbackCount++;
-            if(callbackCount >= 1){
+            if(callbackCount >= 2){
                 res.render('user_profile', context);
             }
         }
