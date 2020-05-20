@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
-                    <img src="/images/Tom.jfif"/>
+                    <img src="/images/no_profile.png"/>
                     <div class="file btn btn-lg btn-primary">
                         Change Photo
                         <input type="file" name="file"/>
@@ -43,7 +43,9 @@
             <div class="col-md-4">
                 <div class="profile-work">
                     <p>Social Media</p>
-                    <a href="{{user_profile.social}}" target="_blank">Check Me Out</a><br/>
+                    <a href="{{user_profile.social}}" target="_blank">{{user_profile.social}}</a><br/>
+                    <p>Music Sample</p>
+                    <a href="{{user_profile.demo_link}}" target="_blank">{{user_profile.demo_link}}</a><br/>
                 </div>
             </div>
             <div class="col-md-8">

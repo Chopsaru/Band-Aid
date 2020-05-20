@@ -104,19 +104,13 @@ module.exports = function(){
 //----------------------------------- get and display single user for editing ------------------------------------------
 
     router.get('/edit/:id',redirectLogin, function(req,res) {
-        console.log(req.session);
-        console.log(req.session.userId);
-
         var callbackCount = 0;
         var context = {};
         context.jsscripts = ["edit_user_profile.js","delete_user_profile.js"];
         var mysql = req.app.get('mysql');
 
-        // get all data for update
         getUserProfile(res, mysql, context, req.params.id, complete);
-        // get instruments to select from
         getInstruments(res, mysql, context, complete);
-        // get instruments to select from
         getProficiency(res, mysql, context, complete);
 
         function complete(){

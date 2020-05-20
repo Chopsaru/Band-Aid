@@ -24,7 +24,6 @@ module.exports = function(){
                 res.end();
             }
             context.instruments = results;
-            console.log(results);
             complete();
         });
     }
