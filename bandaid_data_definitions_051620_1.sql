@@ -36,7 +36,7 @@ CREATE TABLE Messages(
     msg_id INT AUTO_INCREMENT NOT NULL,
     header VARCHAR(255),
     body VARCHAR(510),
-    responded BOOLEAN,
+    req_response BOOLEAN,
     sender_id INT,
     read_bool BOOLEAN,
     inbox_id INT,
@@ -112,38 +112,38 @@ INSERT INTO Users (email, password, fname, lname, phone, zip, lfg, social, demo_
 VALUES ('user5@gmail.com', '$2b$10$89m9BrxckILExfUhtzJCeutOO2JALvUWUje4jDKe/A6v9jcD3za16', 'Sally', 'Sandal', '123456789','99999', 1, 'https://www.facebook.com/', 'https://soundcloud.com/', 5, 4);
 
 
-INSERT INTO Messages (header, body, responded, sender_id, read_bool, inbox_id)
+INSERT INTO Messages (header, body, req_response, sender_id, read_bool, inbox_id)
 VALUES ('Looking for guitarists', 'Must be okayish', 0, 3, 0, 1);
 
-INSERT INTO Messages (header, body, responded, sender_id, read_bool, inbox_id)
+INSERT INTO Messages (header, body, req_response, sender_id, read_bool, inbox_id)
 VALUES ('Looking for vocalists', 'Payment through exposure', 1, 3, 1, 2);
 
-INSERT INTO Messages (header, body, responded, sender_id, read_bool, inbox_id)
+INSERT INTO Messages (header, body, req_response, sender_id, read_bool, inbox_id)
 VALUES ('Looking for pianists', 'Please teach me for free', 0, 3, 0, 4);
 
-INSERT INTO Messages (header, body, responded, sender_id, read_bool, inbox_id)
+INSERT INTO Messages (header, body, req_response, sender_id, read_bool, inbox_id)
 VALUES ('Looking for drummers', 'Eating chicken doesnt count', 0, 1, 3, 3);
 
-INSERT INTO Messages (header, body, responded, sender_id, read_bool, inbox_id)
+INSERT INTO Messages (header, body, req_response, sender_id, read_bool, inbox_id)
 VALUES ('Looking for keytarists', 'Do you exist?', 0, 2, 0, 4);
 
-INSERT INTO Messages (header, body, responded, sender_id, read_bool, inbox_id)
+INSERT INTO Messages (header, body, req_response, sender_id, read_bool, inbox_id)
 VALUES ('Invite Sent!', NULL, NULL, NULL, 1, 3);
 
-INSERT INTO Messages (header, body, responded, sender_id, read_bool, inbox_id)
+INSERT INTO Messages (header, body, req_response, sender_id, read_bool, inbox_id)
 VALUES ('Invite Sent!', NULL, NULL, NULL, 1, 3);
 
-INSERT INTO Messages (header, body, responded, sender_id, read_bool, inbox_id)
+INSERT INTO Messages (header, body, req_response, sender_id, read_bool, inbox_id)
 VALUES ('Invite Sent!', NULL, NULL, NULL, 0, 3);
 
-INSERT INTO Messages (header, body, responded, sender_id, read_bool, inbox_id)
+INSERT INTO Messages (header, body, req_response, sender_id, read_bool, inbox_id)
 VALUES ('Invite Sent!', NULL, NULL, NULL, 0, 2);
 
-INSERT INTO Messages (header, body, responded, sender_id, read_bool, inbox_id)
+INSERT INTO Messages (header, body, req_response, sender_id, read_bool, inbox_id)
 VALUES ('Invite Sent!', NULL, NULL, NULL, 1, 1);
 
-INSERT INTO Messages (header, body, responded, sender_id, read_bool, inbox_id)
+INSERT INTO Messages (header, body, req_response, sender_id, read_bool, inbox_id)
 VALUES ('*User* wants to join your band!', 'Here is his contact info _________', NULL, 2, 1, 3);
 
-INSERT INTO Messages (header, body, responded, sender_id, read_bool, inbox_id)
+INSERT INTO Messages (header, body, req_response, sender_id, read_bool, inbox_id)
 VALUES ('*User* wants to join your band!', 'Here is his contact info _________', NULL, 1, 1, 1);

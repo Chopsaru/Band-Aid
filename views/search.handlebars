@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="/css/index.css">
-<title>Login into Band Aid</title>
+<title>Search for Musicians</title>
 
 <div class="bg">
     <!--------------------------------------------------- Search Table --------------------------------------------------------->
@@ -28,57 +28,60 @@
                     <i class="fa fa-google"></i> New Search
                 </a>
             </div>
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                    {{#if matches}}
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Musician</th>
-                            <th scope="col">Proficiency</th>
-                            <th scope="col">Location</th>
-                            <th scope="col">Demo</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        
-                        {{#each matches}}
-                        <tr>
-                            <td>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1" >
-                                <label class="custom-control-label" for="customCheck1"></label>
-                            </div>
-                            </td>
-                            <td>{{fname}} {{lname}}</td>
-                            <td>{{level}}</td>
-                            <td>{{zip}}</td>
-                            <td><a href="{{demo_link}}">Link</a></td>
-                        </tr>
-                        {{/each}}
-                        
-                        
-                        </tbody>
-                    </table>
+            <form id="inv_form" method="POST">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                        {{#if matches}}
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Musician</th>
+                                <th scope="col">Proficiency</th>
+                                <th scope="col">Location</th>
+                                <th scope="col">Demo</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            
+                            {{#each matches}}
+                            <tr>
+                                <td>
+                                <div class="custom-control custom-checkbox">
+                                    <input id="check_{{user_id}}" name="{{user_id}}" type="checkbox" class="custom-control-input" 
+                                        value="{{fname}} {{lname}}" >
+                                    <label class="custom-control-label" for="check_{{user_id}}"></label>
+                                </div>
+                                </td>
+                                <td>{{fname}} {{lname}}</td>
+                                <td>{{level}}</td>
+                                <td>{{zip}}</td>
+                                <td><a href="{{demo_link}}">Link</a></td>
+                            </tr>
+                            {{/each}}
+                            
+                            </tbody>
+                        </table>
+                        </div>
                     </div>
-                </div>
-                </div>
+                    </div>
 
-            <div class="form-group text-center" style="width: 70%; margin:auto;">
-                <label for="queryDesc">Tell them what you are looking for!</label>
-                <textarea class="form-control"  rows="3"></textarea>
-            </div>
-                        
-            <br>                    
-            <div class="col-md-5 mx-auto form-group">
-                    <a class="btn btn-block send-button" href="/user_id/inbox">
-                        <i class="fa fa-google"></i> Invite Musicians
-                    </a>
-                    
-            </div>
+                <div class="form-group text-center" style="width: 70%; margin:auto;">
+                    <label for="queryDesc">Tell them what you are looking for!</label>
+                    <textarea name="description" class="form-control"  rows="3"></textarea>
+                    <input type="hidden" name="uname" value="{{names.fname}} {{names.lname}}"></input>    
+                </div>
+                            
+                <br>
+
+                <div  class="col-md-5 mx-auto form-group">
+                        <button class="btn btn-block send-button" onclick="sendInvites({{uid}})">Invite Musicians</button>
+                </div>
+                
+
+            </form>
+
             {{else}}
             <div class="container">
                 <h2 class="text-center">No Musicians Found</h2>
@@ -87,4 +90,6 @@
                          
     </div>
     <!-- Content wrapper -->
+</div>
+
 </div>
