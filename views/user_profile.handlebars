@@ -87,10 +87,11 @@
                                                     </td>
                                                     <td>
                                                         {{#if req_response}}
-                                                        <button class="accept_btn">Accept</button>
-                                                        <button class="decline_btn">Decline</button>
+                                                        <button class="accept_btn" onclick="msgRespond('accept', {{inbox_id}}, {{sender_id}}, {{msg_id}} )">Accept</button>
+                                                        <button class="decline_btn" onclick="msgRespond('decline', {{inbox_id}}, {{sender_id}}, {{msg_id}} )">Decline</button>
                                                         {{/if}}
                                                     </td>
+                                                    
                                                     
 
                                                 <script>counter++</script>

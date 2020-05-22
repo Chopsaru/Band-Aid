@@ -105,7 +105,7 @@ module.exports = function(){
 
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["edit_user_profile.js","delete_user_profile.js"];
+        context.jsscripts = ["edit_user_profile.js","delete_user_profile.js", "message_respond.js"];
         var mysql = req.app.get('mysql');
 
         // get all data for update
@@ -205,5 +205,65 @@ module.exports = function(){
             })
         });
 
+//--------------------------------------------- respond to messages ---------------------------------------------------
+        router.post('/accept', (req, res) => {            
+            let emp = req.body;
+            console.log(emp);
+
+            var callbackCount = 0;
+            var mysql = req.app.get('mysql');
+
+            mysql.pool.query("SELECT inbox_id, sender_id, fname, lname, phone, social FROM Messages\
+                                INNER JOIN Users\
+                                ON Users.user_id = Messages.sender_id\
+                                WHERE msg_id = ?;",
+                [emp.msg_id],
+                function(error, results){
+                    if(error){
+                        console.log(error);
+                        res.write(JSON.stringify(error));
+                        res.end();
+                    }else{
+                        var mresults = results[0];
+                        console.log(mresults)
+                        mysql.pool.query('INSERT INTO Messages (header, body, inbox_id, sender_id, req_response)\
+                                             VALUES ("? ? has accepted your invitation!",\
+                                             "Here is their contact information: Phone - ? Social - ?",\
+                                             ?, ?, 0);',
+                        [mresults.fname, mresults.lname, mresults.phone, mresults.social, mresults.sender_id, mresults.inbox_id],
+                        function(error){
+                            if(error){
+                                console.log(error);
+                                res.write(JSON.stringify(error));
+                                res.end();
+                            }else{
+                                complete()
+                            }
+                        })
+                        mysql.pool.query('UPDATE Messages SET req_response = 0 WHERE msg_id = ?', [emp.msg_id], function(error){
+                            if(error){
+                                console.log(error);
+                                res.write(JSON.stringify(error));
+                                res.end();
+                            }else{
+                                complete()
+                            }
+                        })
+                    }
+                })
+
+            function complete(){
+                callbackCount++;
+                if(callbackCount >= 2){
+
+                    res.redirect(req.get('referer'));
+                }
+            }
+        });
+
     return router;
 }();
+
+
+//INSERT INTO Messages (header, inbox_id, req_response) VALUES ("Invite sent to ?", ?, 0);
+//emp.inid, emp.senderid,
