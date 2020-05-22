@@ -18,7 +18,7 @@ module.exports = function(){
 
     // show login page
     router.get('/', redirectUser_Profile,function(req,res) {
-        res.render('login')
+        res.render('bad_login')
     });
 
     // login verification and session set up
@@ -33,11 +33,10 @@ module.exports = function(){
 
         mysql.pool.query("SELECT user_id as id, email as dbEmail, password as dbPassword FROM Users WHERE email = ?", inserts, async function(error, results){
             if(error){
-               res.write(JSON.stringify(error));
-               res.end();
-        }
-
-        var dbPass = results[0].dbPassword;
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            var dbPass = results[0].dbPassword;
             var id = results[0].id;
             var dbEmail = results[0].dbEmail;
             console.log(dbPass);
@@ -46,20 +45,21 @@ module.exports = function(){
 
             // secure login
             const passwordMatched = await bcrypt.compare(req.body.password, dbPass, function (err, isMatch) {
-                    if (err) {
-                        throw err;
-                    } else if (!isMatch) {
-                        res.redirect('/bad_login');
+                if (err) {
+                    throw err;
+                } else if (!isMatch) {
+                    console.log("Need to figure out how to tell user pword didn't work");
+                    res.redirect('/bad_login');
+                } else {
+                    console.log("Password Matches!");
+                    if (req.body.email === dbEmail) {
+                        console.log("made it to password check")
+                        req.session.userId = id;
+                        return res.redirect('/user_profile/' + req.session.userId);
                     } else {
-                        console.log("Password Matches!");
-                        if (req.body.email === dbEmail) {
-                            console.log("made it to password check")
-                            req.session.userId = id;
-                            return res.redirect('/user_profile/' + req.session.userId);
-                        } else {
-                            res.redirect('/bad_login');
-                        }
+                        res.redirect('/login');
                     }
+                }
             });
         });
 

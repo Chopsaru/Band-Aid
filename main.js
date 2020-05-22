@@ -47,6 +47,7 @@ app.use('/', express.static('public'));
 // pages in site
 app.use('/', require('./home.js'));
 app.use('/login', require('./login.js'));
+app.use('/bad_login', require('./bad_login.js'));
 app.use('/sign_up', require('./sign_up.js'));
 app.use('/user_profile', require('./user_profile.js'));
 app.use('/search', require('./search.js'));

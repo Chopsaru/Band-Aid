@@ -145,9 +145,9 @@ module.exports = function(){
         router.put('/:id', function(req, res){
             console.log(req.body);
             console.log(req.params.id);
-            var mysql = req.app.get('mysql');
-            mysql.pool.query("UPDATE Users SET email=?, fname=?, lname=?, phone=?, zip=? WHERE user_id=?",
-                [req.body.email, req.body.fname, req.body.lname, req.body.phone, req.body.zip, req.params.id],
+            var mysql = req.app.get('mysql');                   // need to add looking for gig
+            mysql.pool.query("UPDATE Users SET fname=?, lname=?, email=?, phone=?, zip=?, instrument_id=?, proficiency_id=?, social=?, demo_link=?  WHERE user_id=?",
+                [req.body.fname, req.body.lname, req.body.email, req.body.phone, req.body.zip, req.body.instrument_id, req.body.proficiency_id, req.body.social, req.body.demo_link, req.params.id],
                 function(error){
                     if(error){
                         console.log(error);
