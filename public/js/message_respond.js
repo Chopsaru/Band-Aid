@@ -1,7 +1,11 @@
 function msgRespond(ans, iid, sid, msgid ){
-    $.post('/user_profile/' + ans, { inid: iid, senderid : sid, msg_id: msgid
-    }, 
-        function(returnedData){
-            console.log(returnedData);
-        });
+    //iid = inbox id, sid = sender id
+        $.ajax({
+            url: '/user_profile/' + ans,
+            type: 'POST',
+            data: { inid: iid, senderid : sid, msg_id: msgid},
+            success: function(result){
+                location.reload();
+            }
+        })
  }
