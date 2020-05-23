@@ -45,7 +45,7 @@ app.use(bodyParser.json());
 app.use('/', express.static('public'));
 
 // pages in site
-app.use('/', require('./home.js'));
+app.get('/', function(req,res) {res.render('home')});
 app.use('/login', require('./login.js'));
 app.use('/sign_up', require('./sign_up.js'));
 app.use('/user_profile', require('./user_profile.js'));

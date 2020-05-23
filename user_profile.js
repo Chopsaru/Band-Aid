@@ -132,7 +132,7 @@ module.exports = function(){
     router.get('/edit/password/:id', redirectLogin, function(req,res) {
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["edit_user_profile.js","delete_user_profile.js"];
+        context.jsscripts = ["edit_user_profile.js", "delete_user_profile.js"];
         var mysql = req.app.get('mysql');
 
         getUserProfile(res, mysql, context, req.params.id, complete);
@@ -151,10 +151,22 @@ module.exports = function(){
         router.put('/:id', function(req, res){
             console.log(req.body);
             console.log(req.params.id);
+
             var mysql = req.app.get('mysql');
-            mysql.pool.query("UPDATE Users SET email=?, fname=?, lname=?, phone=?, zip=? WHERE user_id=?",
-                [req.body.email, req.body.fname, req.body.lname, req.body.phone, req.body.zip, req.params.id],
-                function(error){
+            var sqlString;
+            var insertValues;
+
+            sqlString = "UPDATE Users SET\
+                        email=?, fname=?, lname=?, phone=?, zip=?\
+                        WHERE user_id=?";
+            insertValues =  [req.body.email,
+                            req.body.fname,
+                            req.body.lname,
+                            req.body.phone,
+                            req.body.zip,
+                            req.params.id];
+
+            mysql.pool.query(sqlString, insertValues, function(error){
                     if(error){
                         console.log(error);
                         res.write(JSON.stringify(error));

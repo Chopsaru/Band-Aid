@@ -76,11 +76,34 @@ module.exports = function(){
             const hashedPassword = await bcrypt.hash(req.body.password, 10)
 
             var mysql = req.app.get('mysql');
+            var sqlString;
+            var insertValues;
 
-            mysql.pool.query("INSERT INTO Users(instrument_id, proficiency_id, email, password, fname, lname," +
-                "phone, social, zip, lfg, demo_link) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
-                [req.body.insName, req.body.proficiency, req.body.email, hashedPassword, req.body.fname,
-                    req.body.lname, req.body.phone, req.body.social, req.body.zip, 1, req.body.lfg], function (error) {
+            sqlString = "INSERT INTO Users(\
+                        instrument_id,\
+                        proficiency_id,\
+                        email,\
+                        password,\
+                        fname,\
+                        lname,\
+                        phone,\
+                        social,\
+                        zip,\
+                        lfg,\
+                        demo_link)\
+                        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            insertValues =  [req.body.insName, 
+                            req.body.proficiency, 
+                            req.body.email, 
+                            hashedPassword, 
+                            req.body.fname,
+                            req.body.lname, 
+                            req.body.phone, 
+                            req.body.social, 
+                            req.body.zip, 1, 
+                            req.body.lfg];
+
+            mysql.pool.query(sqlString, insertValues, function (error) {
                     if (error) {
                         console.log(JSON.stringify(error))
                         res.write(JSON.stringify(error));

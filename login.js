@@ -26,16 +26,11 @@ module.exports = function(){
 
     // show login page
     router.get('/', redirectUser_Profile,function(req,res) {
-        //console.log(req.session)
         res.render('login')
     });
 
     // login verification and session set up
     router.post('/', function(req,res) {
-        //console.log(req.session)
-        //console.log(req.body);
-        //console.log(req.body.email)
-        //console.log(req.body.password)
 
         var mysql = req.app.get('mysql');
         var inserts = [req.body.email];
