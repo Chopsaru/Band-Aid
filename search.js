@@ -94,15 +94,6 @@ module.exports = function(){
             delete emp.description;
             
             for (musician in emp){
-                mysql.pool.query('INSERT INTO Messages (header, inbox_id, req_response) VALUES ("Invite sent to ?", ?, 0);', [emp[musician], parseInt(uid)], function(error){
-                    if(error){
-                        res.write(JSON.stringify(error));
-                        res.end(); 
-                    }
-                });
-            }
-            
-            for (musician in emp){
                 mysql.pool.query('INSERT INTO Messages (header, body, req_response, sender_id, read_bool, inbox_id)\
                     VALUES ("? wants you in their band!", ?, 1, ?, 0, ?);', [uname, desc, uid, musician], function(error){
                         if(error){
