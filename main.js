@@ -2,6 +2,9 @@ const express = require('express')
 const session = require('express-session')
 const mysql = require('./dbcon.js')
 const app = express()
+const NodeCache = require("node-cache");
+const in_mem_cache = new NodeCache();
+
 const handlebars = require('express-handlebars').create({
   helpers: require("./helpers.js").helpers,
   defaultLayout: 'main'
@@ -25,6 +28,7 @@ app.engine('handlebars', handlebars.engine)
 app.set('view engine', 'handlebars')
 app.set('port', 5000)
 app.set('mysql', mysql)
+app.set('in_mem_cache', in_mem_cache);
 
 // expression-session configuration
 app.use(session({

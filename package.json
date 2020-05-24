@@ -18,7 +18,8 @@
     "express-session": "^1.11.3",
     "ip": "^1.1.5",
     "mysql": "^2.8.0",
-    "formidable": "^1.2.2"
+    "formidable": "^1.2.2",
+    "node-cache": "^5.1.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.3",
