@@ -144,7 +144,7 @@ module.exports = function () {
 
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["edit_user_profile.js", "delete_user_profile.js"];
+        context.jsscripts = ["edit_user_profile.js", "delete_user_profile.js","message_respond.js"];
         var mysql = req.app.get('mysql');
 
 
