@@ -50,56 +50,17 @@ module.exports = function(){
 
     function getMessages(res, mysql, context, id, complete){
 
-        var sql = "SELECT * from Messages WHERE req_response = 1 AND inbox_id = ?";
+        var sql = "SELECT * from Messages WHERE inbox_id = ?";
         var inserts = [id];
-        console.log("SELECT * from Messages WHERE req_response = 1 AND inbox_id = ? " + id);
+        console.log("SELECT * from Messages WHERE inbox_id = ? " + id);
         // Query and store results------------------------------------------------------
         mysql.pool.query(sql, inserts, function(error, results){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            
             console.log(results)
             context.messages = results;
-            complete();
-        });
-    }
-    //--------------------------------------- get sent messages -------------------------------------------------
-
-    function getSentMessages(res, mysql, context, id, complete) {
-
-        var sql = "SELECT * from Messages WHERE sender_id = ?";
-        var inserts = [id];
-        console.log("SELECT * from Messages WHERE sender_id = ? " + id);
-        
-        mysql.pool.query(sql, inserts, function (error, results) {
-            if (error) {
-                res.write(JSON.stringify(error));
-                res.end();
-            }
-            console.log('made it here')
-            console.log(results)
-            context.sent = results;
-            complete();
-        });
-    }
-    //--------------------------------------- get pending messages -------------------------------------------------
-
-    function getRespondedMessages(res, mysql, context, id, complete) {
-
-        var sql = "SELECT * from Messages WHERE req_response = 0 AND inbox_id = ?";
-        var inserts = [id];
-        console.log("SELECT * from Messages WHERE req_response = 0 AND inbox_id = ? " + id);
-        // Query and store results------------------------------------------------------
-        mysql.pool.query(sql, inserts, function (error, results) {
-            if (error) {
-                res.write(JSON.stringify(error));
-                res.end();
-            }
-
-            console.log(results)
-            context.responded = results;
             complete();
         });
     }
@@ -144,28 +105,18 @@ module.exports = function(){
 
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["edit_user_profile.js","delete_user_profile.js"];
+        context.jsscripts = ["edit_user_profile.js","delete_user_profile.js", "message_respond.js"];
         var mysql = req.app.get('mysql');
 
-
-        
-        
         // get all data for update
         getUserProfile(res, mysql, context, req.session.userId, complete);
         // get all messages where id matches
         getMessages(res, mysql, context, req.params.id, complete);
-        console.log("here")
-        getSentMessages(res, mysql, context, req.params.id, complete);
-        getRespondedMessages(res, mysql, context, req.params.id, complete);
-        
-       
-        
-        
 
         console.log("Made it back to redirect")
         function complete(){
             callbackCount++;
-            if(callbackCount >= 4){
+            if(callbackCount >= 2){
                 res.render('user_profile', context);
             }
         }
@@ -252,6 +203,122 @@ module.exports = function(){
                     res.status(202).end();
                 }
             })
+        });
+
+//--------------------------------------------- respond to messages ---------------------------------------------------
+        router.post('/accept', (req, res) => {            
+            let emp = req.body;
+            console.log(emp);
+
+            var callbackCount = 0;
+            var mysql = req.app.get('mysql');
+            
+            //get query params
+            mysql.pool.query("SELECT inbox_id, sender_id, fname, lname, phone, social FROM Messages\
+                                INNER JOIN Users\
+                                ON Users.user_id = Messages.sender_id\
+                                WHERE msg_id = ?;",
+                [emp.msg_id],
+                function(error, results){
+                    if(error){
+                        console.log(error);
+                        res.write(JSON.stringify(error));
+                        res.end();
+                    }else{
+                        //insert message into musicians inbox w/ contact info
+                        var mresults = results[0];
+                        console.log(mresults)
+                        mysql.pool.query('INSERT INTO Messages (header, body, inbox_id, sender_id, req_response)\
+                                             VALUES ("? ? has accepted your invitation!",\
+                                             "Here is their contact information: Phone - ? Social - ?",\
+                                             ?, ?, 0);',
+                        [mresults.fname, mresults.lname, mresults.phone, mresults.social, mresults.sender_id, mresults.inbox_id],
+                        function(error){
+                            if(error){
+                                console.log(error);
+                                res.write(JSON.stringify(error));
+                                res.end();
+                            }else{
+                                complete()
+                            }
+                        })
+                        //set required response flag to false
+                        mysql.pool.query('UPDATE Messages SET req_response = 0 WHERE msg_id = ?', [emp.msg_id], function(error){
+                            if(error){
+                                console.log(error);
+                                res.write(JSON.stringify(error));
+                                res.end();
+                            }else{
+                                complete()
+                            }
+                        })
+                    }
+                })
+
+            function complete(){
+                callbackCount++;
+                if(callbackCount >= 2){
+                    console.log("made it to end")
+                    res.status(200).end();
+                }
+            }
+        });
+
+
+        router.post('/decline', (req, res) => {            
+            let emp = req.body;
+            console.log(emp);
+
+            var callbackCount = 0;
+            var mysql = req.app.get('mysql');
+            
+            //get query params
+            mysql.pool.query("SELECT inbox_id, sender_id, fname, lname FROM Messages\
+                                INNER JOIN Users\
+                                ON Users.user_id = Messages.sender_id\
+                                WHERE msg_id = ?;",
+                [emp.msg_id],
+                function(error, results){
+                    if(error){
+                        console.log(error);
+                        res.write(JSON.stringify(error));
+                        res.end();
+                    }else{
+                        //insert message into musicians inbox w/ contact info
+                        var mresults = results[0];
+                        console.log(mresults)
+                        mysql.pool.query('INSERT INTO Messages (header, inbox_id, sender_id, req_response)\
+                                             VALUES ("? ? has declined your invitation.", ?, ?, 0);',
+                        [mresults.fname, mresults.lname, mresults.sender_id, mresults.inbox_id],
+                        function(error){
+                            if(error){
+                                console.log(error);
+                                res.write(JSON.stringify(error));
+                                res.end();
+                            }else{
+                                complete()
+                            }
+                        })
+                        //set required response flag to false
+                        mysql.pool.query('UPDATE Messages SET req_response = 0 WHERE msg_id = ?', [emp.msg_id], function(error){
+                            if(error){
+                                console.log(error);
+                                res.write(JSON.stringify(error));
+                                res.end();
+                            }else{
+                                complete()
+                            }
+                        })
+                    }
+                })
+
+            function complete(){
+                callbackCount++;
+                if(callbackCount >= 2){
+                    console.log("made it to end")
+                    res.status(200).end();
+                }
+            }
         });
 
     return router;
