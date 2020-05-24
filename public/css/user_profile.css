@@ -106,38 +106,60 @@ body{
     font-weight: 600;
     color: #0062cc;
 }
+
 /*Inbox Section*/
 .inbox_body {
-    background-color: white;
-    right: 25px;
-    border-radius: 3px;
+    
+    margin-top: -150px;
 }
 
 .inbox_button {
     background-color: royalblue;
     color: white;
     border-radius: 3px;
-    width:100%
+    width: 100%
+}
+
+    .inbox_button:hover {
+        outline: 0;
+        background-color: gray;
+        color: royalblue;
+    }
+
+
+
+.tab-pane {
+}
+
+.accept_btn {
+    background-color: seagreen;
+}
+
+.decline_btn {
+    background-color: indianred;
+    color: white;
+}
+
+thead {
+    
     
 }
 
-.inbox_button:hover {
-     outline: 0;
-     background-color: gray;
-     color: royalblue;
-    }
-table {
-    padding:100%;
-    background-color:white;
-    color:white;
+tbody {
+    
 }
-.tab-pane{
 
+tr {
+   
 }
-.accept_btn{
-    background-color: seagreen;
+table {
+    
 }
-.decline_btn{
-    background-color: indianred;
-    color: white;
+.inbox_container {
+    font-family: Arial;
+    background-color: white;
+    width: 700px;
+}
+.adcell{
+    width:200px;
 }
