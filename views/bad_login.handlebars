@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="/css/index.css">
+<title>Login into Band Aid</title>
+
+<div class="bg">
+    <!--------------------------------------------------- Login Form --------------------------------------------------------->
+    </br></br></br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mx-auto shadow-border form-bg">
+                <form id="login_form" method="POST" action="/login" onsubmit="checkPassword()">
+                    <h5> Incorrect Email or Password</h5>
+                    Please Re-enter or  Click <a href="/sign_up">Sign Up</a>
+                </br>   </br>
+                               <div class="form-group">
+                            <label>Email Address:</label>
+                        <input type="email" class="form-control" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password:</label>
+                        <input type="password" class="form-control" name="password" placeholder="Password" required>
+                    </div>
+                    </br>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-block g-button">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

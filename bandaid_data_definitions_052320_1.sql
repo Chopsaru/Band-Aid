@@ -14,6 +14,7 @@ CREATE TABLE Users(
     zip INT NOT NULL,
     lfg BOOLEAN NOT NULL,
     demo_link VARCHAR(255),
+    profile_image VARCHAR(255),
     PRIMARY KEY(user_id)
 );
 
