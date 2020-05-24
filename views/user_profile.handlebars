@@ -1,127 +1,104 @@
-﻿<link rel="stylesheet" href="/css/user_profile.css">
+﻿<link rel="stylesheet" href = "/css/user_profile.css">
 <title>Welcome {{user_profile.fname}}</title>
 
 <!--------------------------------------------------- Profile --------------------------------------------------------->
 <!-- credit - https://bootsnipp.com/snippets/K0ZmK -->
 </br>
 <div class="container emp-profile">
-    <!--    <form method="post">-->
-    <div class="row">
-        <div class="col-md-4">
-            <div class="profile-img">
-                {{#if user_profile.profile_image_data}}
-                {{else}}
-                    <img src="{{user_profile.profile_image}}"/>
-                {{/if}}
-
-                <form id="theImageForm"
-                      action="/user_profile/edit/profile_image/{{user_profile.id}}"
-                      method="post"
-                      enctype="multipart/form-data">
-
-                    <input class="btn btn-primary"
-                           type="file" id="theImageField"
-                           accept="image/png, image/jpeg"
-                           name="image">
-
-                    <!--                        <p id="errorMessage" class="hide"></p>-->
-                    <!--                        <p id="successMessage" class="hide"></p>-->
-                    <input class="btn btn-primary" type="submit" value="upload">
-
-                    <!--                        <a href="" id="clearImage">Clear</a>-->
-                </form>
-
-
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="profile-head">
-                <h5>
-                    {{user_profile.fname}}, {{user_profile.lname}}
-                </h5>
-                <h6>
-                    Zip Code: {{user_profile.zip}}
-                </h6>
-                <p class="profile-rating">Skill Level : <span>{{user_profile.insProficiency}}</span></p>
-                <!--Need to replace with new DB----->
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                           aria-controls="profile" aria-selected="true">User Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-                           aria-selected="false">Inbox</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <a class="profile-edit-btn" href="/user_profile/edit/{{user_profile.id}}">Edit/Delete Profile</a>
-        </div>
-    </div>
-    <br><br>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="profile-work">
-                <p>Social Media</p>
-                <a href="{{user_profile.social}}" target="_blank">{{user_profile.social}}</a><br/>
-                <p>Music Sample</p>
-                <a href="{{user_profile.demo_link}}" target="_blank">{{user_profile.demo_link}}</a><br/>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <div class="tab-content profile-tab" id="myTabContent">
-                <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>Inbox</label>
-                        </div>
-                        <div class="col-md-6">
-                            <p>Place Inbox Here</p>
-                        </div>
+    <form method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img src="/images/no_profile.png"/>
+                    <div class="file btn btn-lg btn-primary">
+                        Change Photo
+                        <input type="file" name="file"/>
                     </div>
                 </div>
-                <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>Primary Instrument</label>
-                        </div>
-                        <div class="col-md-6">
-                            <p>{{user_profile.insName}}</p>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5>
+                        {{user_profile.fname}}, {{user_profile.lname}}
+                    </h5>
+                    <h6>
+                        {{user_profile.zip}}
+                    </h6>
+                    <p class="proile-rating">Skill Level : <span>{{user_profile.insProficiency}}</span></p> <!--Need to replace with new DB----->
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">User Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">Inbox</a>
+                        </li>
+                     </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <a class="profile-edit-btn" href="/user_profile/edit/{{user_profile.id}}">Edit/Delete Profile</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                    <p>Social Media</p>
+                    <a href="{{user_profile.social}}" target="_blank">{{user_profile.social}}</a><br/>
+                    <p>Music Sample</p>
+                    <a href="{{user_profile.demo_link}}" target="_blank">{{user_profile.demo_link}}</a><br/>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Inbox</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Place Inbox Here</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>Looking for gig?</label>
+                    <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Primary Instrument</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{user_profile.insName}}</p>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <p>{{user_profile.lfg}}</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Looking for</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{user_profile.lfg}}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>Email</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Email</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{user_profile.email}}</p>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <p>{{user_profile.email}}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>Phone</label>
-                        </div>
-                        <div class="col-md-6">
-                            <p>{{user_profile.phone}}</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Phone</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{user_profile.phone}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!--    </form>-->
+    </form>
     </br>
     </br>
-    <input type="button" value="Search" class="btn btn-block g-button"
-           onclick="window.location.href='/search/{{user_profile.id}}'">
+    <input type="button" value="Search" class="btn btn-block g-button" onclick="window.location.href='/search/{{user_profile.id}}'">
 </div>
