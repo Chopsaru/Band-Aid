@@ -106,3 +106,60 @@ body{
     font-weight: 600;
     color: #0062cc;
 }
+
+/*Inbox Section*/
+.inbox_body {
+    
+    margin-top: -150px;
+}
+
+.inbox_button {
+    background-color: royalblue;
+    color: white;
+    border-radius: 3px;
+    width: 100%
+}
+
+    .inbox_button:hover {
+        outline: 0;
+        background-color: gray;
+        color: royalblue;
+    }
+
+
+
+.tab-pane {
+}
+
+.accept_btn {
+    background-color: seagreen;
+}
+
+.decline_btn {
+    background-color: indianred;
+    color: white;
+}
+
+thead {
+    
+    
+}
+
+tbody {
+    
+}
+
+tr {
+   
+}
+table {
+    
+}
+.inbox_container {
+    font-family: Arial;
+    background-color: white;
+    width: 700px;
+}
+.adcell{
+    width:200px;
+}

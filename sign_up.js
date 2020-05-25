@@ -17,7 +17,7 @@ module.exports = function(){
 
     function getInstruments(res, mysql, context, complete){
 
-        mysql.pool.query("SELECT instrument_id as id, name as insName FROM instruments",
+        mysql.pool.query("SELECT instrument_id as id, name as insName FROM Instruments",
             function(error, results){
             if(error){
                 res.write(JSON.stringify(error));
@@ -33,7 +33,7 @@ module.exports = function(){
     function getProficiency(res, mysql, context, complete){
 
         // Construct query--------------------------------------------------------------
-        var sql = "SELECT proficiency_id as id, level as insProficiency FROM proficiencies";
+        var sql = "SELECT proficiency_id as id, level as insProficiency FROM Proficiencies";
         // Query and store results------------------------------------------------------
         mysql.pool.query(sql, function(error, results){
             if(error){

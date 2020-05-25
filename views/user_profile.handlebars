@@ -1,3 +1,4 @@
+
 ﻿<link rel="stylesheet" href="/css/user_profile.css">
 <title>Welcome {{user_profile.fname}}</title>
 
@@ -72,14 +73,134 @@
         </div>
         <div class="col-md-8">
             <div class="tab-content profile-tab" id="myTabContent">
-                <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>Inbox</label>
+                <div class="tab-pane inbox_body fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="col-md-6 column">
+                        <ul class="nav nav-tabs " id="msg_nav" style="list-style: none;">
+                            <li class="nav-item"><a class="nav-link active inbox_button" href="#recieved" role="tab" data-toggle="tab">Recieved  <span id="alertcounter" class="badge badge-danger"></span></a></li>
+                            <li class="nav-item"><a class="nav-link inbox_button" href="#sent" role="tab" data-toggle="tab">Sent</a></li>
+                            <li class="nav-item"><a class="nav-link inbox_button" href="#pending" role="tab" data-toggle="tab">Pending</a></li>
+                        </ul>
+                    </div>
+
+
+                    <div class="col-md-8 tab-content">
+
+                        <div role="tabpanel" class="tab-pane inbox_container table-responsive active" id="recieved">
+                            {{#if messages}}
+                            <table class="table table-bordered inbox_tables">
+                                <thead>
+                                <td class="adcell">
+                                    Title
+                                </td>
+                                <td>
+                                    Content
+                                </td>
+                                <td>
+                                    Accept/Decline
+                                </td>
+                                </thead>
+                                <tbody>
+                                    <script>var counter = 0</script>
+                                    {{#each messages}}
+                                    <tr>
+                                        <td>
+                                            {{header}}
+                                        </td>
+                                        <td>
+                                            {{body}}
+                                        </td>
+                                        <td>
+                                            {{#if req_response}}
+
+                                            <button type="button" class="accept_btn" onclick="msgRespond('accept', {{inbox_id}}, {{sender_id}}, {{msg_id}} )">Accept</button>
+                                            <button type="button" class="decline_btn" onclick="msgRespond('decline', {{inbox_id}}, {{sender_id}}, {{msg_id}} )">Decline</button>
+                                            {{/if}}
+                                        </td>
+
+                                        <script>counter++</script>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                            <script>document.getElementById('alertcounter').innerHTML = counter</script>
+                            {{else}}
+
+                            <div class="container"> <h2 class="text-center">No new messages</h2></div>
+
+                            {{/if}}
                         </div>
-                        <div class="col-md-6">
-                            <p>Place Inbox Here</p>
+
+                        <div role="tabpanel" class="tab-pane table-responsive inbox_container" id="sent">
+                            {{#if sent}}
+                            <table class="table table-bordered inbox_tables">
+                                <thead>
+                                <td class="adcell">
+                                    Title
+                                </td>
+                                <td>
+                                    Content
+                                </td>
+
+                                </thead>
+                                <tbody>
+
+                                    {{#each sent}}
+                                    <tr>
+                                        <td>
+                                            {{header}}
+                                        </td>
+                                        <td>
+                                            {{body}}
+                                        </td>
+
+
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+
+                            {{else}}
+
+                            <div class="container"> <h2 class="text-center">You have no sent messages</h2></div>
+
+                            {{/if}}
                         </div>
+                        <div role="tabpanel" class="tab-pane table-responsive inbox_container" id="pending">
+                            {{#if responded}}
+                            <table class="table table-bordered inbox_tables">
+                                <thead>
+                                <td class="adcell">
+                                    Title
+                                </td>
+                                <td>
+                                    Content
+                                </td>
+
+                                </thead>
+                                <tbody>
+
+                                    {{#each responded}}
+                                    <tr>
+                                        <td>
+                                            {{header}}
+                                        </td>
+                                        <td>
+                                            {{body}}
+                                        </td>
+
+
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+
+                            {{else}}
+
+                            <div class="container"> <h2 class="text-center">You have no sent messages</h2></div>
+
+                            {{/if}}
+                        </div>
+
                     </div>
                 </div>
                 <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -125,3 +246,4 @@
     <input type="button" value="Search" class="btn btn-block g-button"
            onclick="window.location.href='/search/{{user_profile.id}}'">
 </div>
+
