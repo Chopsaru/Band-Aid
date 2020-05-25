@@ -167,7 +167,6 @@ module.exports = (function () {
       getSentMessages(res, mysql, context, req.params.id, complete);
       getRespondedMessages(res, mysql, context, req.params.id, complete);
 
-
       console.log('Made it back to redirect')
 
       function complete () {
