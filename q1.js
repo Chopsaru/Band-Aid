@@ -34,6 +34,8 @@ module.exports = function(){
         let context = {};
         let mysql = req.app.get('mysql');
 
+        context.jsscripts = ['q1script.js'];
+
         getInstruments(res, mysql, context, complete);
 
         context.uid = req.params.uid;
