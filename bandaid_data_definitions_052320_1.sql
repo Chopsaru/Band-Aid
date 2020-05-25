@@ -59,7 +59,8 @@ ON DELETE CASCADE;
 ALTER TABLE Messages
 ADD CONSTRAINT fk_messages_1
 FOREIGN KEY (inbox_id)
-REFERENCES Users(user_id);
+REFERENCES Users(user_id)
+ON DELETE CASCADE;
 
 ------------------------------------------------------------------
 -- SAMPLE DATA

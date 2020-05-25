@@ -1,8 +1,6 @@
 module.exports = function () {
   var express = require('express')
   var router = express.Router()
-  const bcrypt = require('bcrypt')
-
 
   router.get('/', function (req, res) {
     req.session.destroy(function(err) {
@@ -11,8 +9,6 @@ module.exports = function () {
 
     res.render('login', {});
   })
-
-
 
   return router
 }()

@@ -201,26 +201,7 @@ module.exports = (function () {
       }
     })
 
-    // ----------------------------------- change password page ####not functioning yet######--------------------------------
-
-    router.get('/edit/password/:id', redirectLogin, function (req, res) {
-      var callbackCount = 0
-      var context = {}
-      context.jsscripts = ['edit_user_profile.js', 'delete_user_profile.js']
-      var mysql = req.app.get('mysql')
-
-      getUserProfile(res, mysql, context, req.params.id, complete)
-
-      function complete () {
-        callbackCount++
-        if (callbackCount >= 1) {
-          res.render('update_password', context)
-        }
-      }
-    })
-
     // ----------------------------------- updates database for user_profile change -----------------------------------------
-    // Need to get instrument, skill level, and gig going #############################################
 
     router.put('/:id', function (req, res) {
       console.log(req.body)
@@ -242,15 +223,17 @@ module.exports = (function () {
 
     // --------------------------------------------- delete user profiles ---------------------------------------------------
     router.delete('/:id', function (req, res) {
-      var mysql = req.app.get('mysql')
-      mysql.pool.query('DELETE FROM Users WHERE user_id = ?', req.params.id, function (error) {
-        if (error) {
-          res.write(JSON.stringify(error))
-          res.status(400)
-          res.end()
-        } else {
-          res.status(202).end()
-          req.session.destroy()
+        console.log("INSIDE DELETE SQL");
+        console.log(req.session.userId);
+        var mysql = req.app.get('mysql')
+        mysql.pool.query('DELETE FROM Users WHERE user_id = ?', req.session.userId, function (error) {
+            if (error) {
+                res.write(JSON.stringify(error))
+                res.status(400)
+                res.end()
+            } else {
+                res.status(202).end()
+                req.session.destroy()
         }
       })
     })

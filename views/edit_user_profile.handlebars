@@ -47,6 +47,7 @@
                 <input type="text" class="form-control" name="social" value="{{user_profile.social}}">
                 <label>Demo Link:</label>
                 <input type="text" class="form-control" name="demo_link" value="{{user_profile.demo_link}}">
+
                 <div class="checkbox">
                     <label>
                         <input type="checkbox"> Are you looking to join a band?
@@ -54,9 +55,10 @@
                 </div>
             </form>
             <button onclick="updateUserProfile({{user_profile.id}})" class="btn btn-default send-button">Update Account</button>
+    <!--
             </br></br>
-            Click <a href="/user_profile/edit/password/{{user_profile.id}}"">here</a> to change account password
-            </br>
+            Click <a href="/user_profile/edit/password/{{user_profile.id}}"">here</a> to change account password-->
+            </br></br>
             If you want to delete Band Aid User Account click
             <button onclick="areYouSure(); deleteUserProfile({{user_profile.id}})">Delete</button>
         </div>
