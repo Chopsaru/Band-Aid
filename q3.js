@@ -1,6 +1,54 @@
 module.exports = function(){
     let express = require('express');
     let router = express.Router();
+    const {Client, Status} = require("@googlemaps/google-maps-services-js");
+
+    var geoKey = "AIzaSyBv5zGSLMMofgJgzdnNkaL7yiGlDh3NuBM";
+    var http = require("https");
+
+
+    function getZip(res, client, context, complete) {
+        // Connect to google geocoding url
+        /*
+        var url = "https://maps.googleapis.com/maps/api/geocode/json?";
+        url += "components=postal_code:" + 60523;
+        url += "&key=" + geoKey;
+        var request = http.get(url, function(req, res, results) {
+            console.log("Attempting Google API Request");
+            console.log(results);
+            complete();
+        });
+        */
+
+        client
+        .geocode({
+          params: {
+            address: "60523",
+            key: geoKey,
+          },
+          timeout: 1000, // milliseconds
+        })
+        .then((r) => {
+          if (r.data.status === Status.OK) {
+            console.log("Google Geocoding:");  
+            console.log("Lat: ", context.lat, "Long: ", context.lng);
+            //console.log(r.data.results[0].elevation);
+            context.lat = r.data.results[0].geometry.location.lat;
+            context.lng = r.data.results[0].geometry.location.lng;
+            console.log(r.data.results[0]);
+            console.log("Lat: ", context.lat, "Long: ", context.lng);
+          } else {
+            console.log(r.data.error_message);
+            console.log("Geocoding Error!");
+          }
+          complete();  
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+        
+    }
+
 
 //----------------------------------------------- session handlers -----------------------------------------------------
     // handles user if not signed in
@@ -14,11 +62,24 @@ module.exports = function(){
 
     //show page
     router.get('/:uid',redirectLogin,function(req,res) {
+        let callbackCount = 0;
         let context = {};
+        const client = new Client({});
+
+        getZip(res, client, context, complete);
+
 
         context.uid = req.params.uid;
-        
-        res.render('q3', context);
+
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                console.log("Google API request finished. Result:");
+                console.log(context.lat, context.lng);        
+                res.render('q3', context);
+            }
+        }
+
     });
 
     return router;
