@@ -8,18 +8,6 @@ module.exports = function(){
 
 
     function getZip(res, client, context, complete) {
-        // Connect to google geocoding url
-        /*
-        var url = "https://maps.googleapis.com/maps/api/geocode/json?";
-        url += "components=postal_code:" + 60523;
-        url += "&key=" + geoKey;
-        var request = http.get(url, function(req, res, results) {
-            console.log("Attempting Google API Request");
-            console.log(results);
-            complete();
-        });
-        */
-
         client
         .geocode({
           params: {
@@ -32,7 +20,6 @@ module.exports = function(){
           if (r.data.status === Status.OK) {
             console.log("Google Geocoding:");  
             console.log("Lat: ", context.lat, "Long: ", context.lng);
-            //console.log(r.data.results[0].elevation);
             context.lat = r.data.results[0].geometry.location.lat;
             context.lng = r.data.results[0].geometry.location.lng;
             console.log(r.data.results[0]);
