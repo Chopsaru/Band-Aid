@@ -2,6 +2,10 @@ module.exports = function(){
     let express = require('express');
     let router = express.Router();
 
+    const {Client, Status} = require("@googlemaps/google-maps-services-js");
+    var geoKey = "AIzaSyBv5zGSLMMofgJgzdnNkaL7yiGlDh3NuBM";
+    var http = require("https");
+
 //----------------------------------------------- session handlers -----------------------------------------------------
     // handles user if not signed in
     const redirectLogin = (req, res, next) =>{
@@ -12,7 +16,36 @@ module.exports = function(){
         }
     }
 
-    function getMatchingMusicians(res, req, mysql, context, complete){
+
+    function getZip(res, zip, client, context, complete) {
+        client
+        .geocode({
+          params: {
+            address: zip,
+            key: geoKey,
+          },
+          timeout: 1000, // milliseconds
+        })
+        .then((r) => {
+          if (r.data.status === Status.OK) {
+            console.log("Google Geocoding:");  
+            console.log("Lat: ", context.lat, "Long: ", context.lng);
+            context.lat = r.data.results[0].geometry.location.lat;
+            context.lng = r.data.results[0].geometry.location.lng;
+            console.log(r.data.results[0]);
+            console.log("Lat: ", context.lat, "Long: ", context.lng);
+          } else {
+            console.log(r.data.error_message);
+            console.log("Geocoding Error!");
+          }
+          complete();  
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+        
+        
+    }    function getMatchingMusicians(res, req, mysql, context, complete){
         //get query rows with matching userid
         // Construct query--------------------------------------------------------------
         let sql =   "SELECT Users.user_id, Users.fname, Users.lname, Users.demo_link, Users.zip, Instruments.name, Proficiencies.level \
@@ -62,6 +95,8 @@ module.exports = function(){
         let callbackCount = 0;
         let context = {};
         let mysql = req.app.get('mysql');
+        const client = new Client({});
+
         context.jsscripts = ["send_invites.js"];
 
         context.uid = req.params.uid;
@@ -71,7 +106,7 @@ module.exports = function(){
 
         getMatchingMusicians(res, req, mysql, context, complete);
         getUsersNames(res, req, mysql, context, complete);
-
+        getZip(res, zip, client, context, complete);
 
         function complete(){
             callbackCount++;

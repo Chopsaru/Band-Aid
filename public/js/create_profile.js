@@ -1,5 +1,5 @@
 function createProfile(){
-   console.log("made it to create profile");
+  // console.log("made it to create profile");
     $.ajax({
         url: '/sign_up',
         type: 'POST',
