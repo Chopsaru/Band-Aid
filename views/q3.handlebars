@@ -14,7 +14,7 @@
                         <input type "number" minlength="5" manlength="5" class="form-control" id="zipInput" rows="1"></input>
                         <br>
                         <label for="zipRadius">How far do you want to look?</label>
-                        <select class="form-control" id="profSelect">
+                        <select class="form-control" id="radiusSelect">
                         <option value="10">10 mile radius</option>
                         <option value="50">50 mile radius</option>
                         <option value="100">100 mile radius</option>
@@ -34,12 +34,15 @@
 <script>   
 
     document.getElementById('submit_btn').addEventListener('click', function(){
-        var zipInput = document.getElementById('zipInput').value;
+        let zipInput = document.getElementById('zipInput').value;
+        let zipRadiusInput = document.getElementById('radiusSelect').value;
         localStorage.setItem('zip', zipInput);
-        var localInst = localStorage.getItem('instrument');
-        var localProf = localStorage.getItem('proficiency');
-        var localZip = localStorage.getItem('zip');
-        window.location = '/search/' + {{uid}} + '?instrument=' + localInst + '&proficiency=' + localProf + '&zip=' + localZip;
+        localStorage.setItem('zipRadius', zipRadiusInput);
+        let localInst = localStorage.getItem('instrument');
+        let localProf = localStorage.getItem('proficiency');
+        let localZip = localStorage.getItem('zip');
+        let localZipRadius = localStorage.getItem('zipRadius');
+        window.location = '/search/' + {{uid}} + '?instrument=' + localInst + '&proficiency=' + localProf + '&zip=' + localZip + '&zipRadius=' + localZipRadius;
     });
 </script>
 <!--</div>-->
