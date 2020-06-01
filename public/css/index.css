@@ -134,3 +134,52 @@ input {
     -moz-box-shadow: 4px 19px 45px 38px rgba(0,0,0,0.27);
     box-shadow: 4px 19px 45px 38px rgba(0,0,0,0.27);
 }
+/*About page styling*/
+.about_head{
+    text-align:center;
+}
+.about_tabs{
+    margin-left:10%;
+    text-align:center;
+    
+}
+.about_content{
+    width:75%;
+    
+    margin-left:10%;
+    font-size:25px;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 1px 1px;
+    grid-template-areas: "Content Content image image" "Content Content image image" ". buttonsign buttonsign .";
+}
+
+.Content {
+    grid-area: Content;
+}
+
+.buttonsign {
+    grid-area: buttonsign;
+}
+
+.image {
+    grid-area: image;
+}
+.musician_tab{
+    font-size:20px;
+    
+}
+.tab_btn{
+    margin-top:10px;
+}
+.tab_img{
+    width:450px;
+    border-radius:20px;
+    border:solid 2px black;
+
+}
+
+
