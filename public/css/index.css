@@ -176,10 +176,23 @@ input {
     margin-top:10px;
 }
 .tab_img{
-    width:450px;
+    display:block;
+    width:100%;
+    height:auto;
     border-radius:20px;
     border:solid 2px black;
 
 }
+.zoom {
+    
+    
+    transition: transform .2s; /* Animation */
+    
+    margin: 0 auto;
+}
+
+    .zoom:hover {
+        transform: scale(1.7); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    }
 
 
