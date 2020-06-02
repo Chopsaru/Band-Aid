@@ -2,6 +2,8 @@ module.exports = function(){
     let express = require('express');
     let router = express.Router();
 
+
+
 //----------------------------------------------- session handlers -----------------------------------------------------
     // handles user if not signed in
     const redirectLogin = (req, res, next) =>{
@@ -17,8 +19,9 @@ module.exports = function(){
         let context = {};
 
         context.uid = req.params.uid;
-        
+
         res.render('q3', context);
+
     });
 
     return router;

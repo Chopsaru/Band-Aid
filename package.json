@@ -10,15 +10,16 @@
   "author": "Team 1",
   "license": "ISC",
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^2.6.1",
     "bcrypt": "^4.0.1",
     "body-parser": "^1.13.3",
     "connect-flash": "^0.1.1",
     "express": "^4.13.2",
     "express-handlebars": "^4.0.3",
     "express-session": "^1.11.3",
+    "formidable": "^1.2.2",
     "ip": "^1.1.5",
     "mysql": "^2.8.0",
-    "formidable": "^1.2.2",
     "node-cache": "^5.1.0"
   },
   "devDependencies": {

@@ -2,6 +2,8 @@ module.exports = function(){
     var express = require('express');
     var router = express.Router();
     const bcrypt = require('bcrypt')
+    const {Client, Status} = require("@googlemaps/google-maps-services-js");
+    var geoKey = "AIzaSyBv5zGSLMMofgJgzdnNkaL7yiGlDh3NuBM";
 
 //----------------------------------------------- session handlers -----------------------------------------------------
 // handles user if signed in
@@ -12,6 +14,7 @@ module.exports = function(){
             next()
         }
     }
+
 
 //--------------------------------------------- get instrument data ----------------------------------------------------
 
@@ -25,6 +28,34 @@ module.exports = function(){
             }
             context.instruments = results;
             complete();
+        });
+    }
+
+    function convertZip(res, zip, client, context, complete) {
+        client
+        .geocode({
+          params: {
+            address: zip,
+            key: geoKey,
+          },
+          timeout: 1000, // milliseconds
+        })
+        .then((r) => {
+          if (r.data.status === Status.OK) {
+            console.log("Google Geocoding:");  
+            console.log("Lat: ", context.lat, "Long: ", context.lng);
+            context.lat = r.data.results[0].geometry.location.lat;
+            context.lng = r.data.results[0].geometry.location.lng;
+            console.log(r.data.results[0]);
+            console.log("Lat: ", context.lat, "Long: ", context.lng);
+          } else {
+            console.log(r.data.error_message);
+            console.log("Geocoding Error!");
+          }
+          complete();  
+        })
+        .catch((e) => {
+          console.log(e);
         });
     }
 
@@ -68,28 +99,38 @@ module.exports = function(){
 
     // create profile
     router.post('/', async(req, res) => {
-        console.log("Made to sign up post");
-        console.log(req.body);
+        //console.log("Made to sign up post");
+        //console.log(req.body);
         try {
             // hash password for security
-            const hashedPassword = await bcrypt.hash(req.body.password, 10)
-
+            const hashedPassword = await bcrypt.hash(req.body.password, 10);
             var mysql = req.app.get('mysql');
+            const client = new Client({});
+            let context = {};
+            let callbackCount = 0;
 
-            mysql.pool.query("INSERT INTO Users(instrument_id, proficiency_id, email, password, fname, lname," +
-                "phone, social, zip, lfg, demo_link) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
-                [req.body.insName, req.body.proficiency, req.body.email, hashedPassword, req.body.fname,
-                    req.body.lname, req.body.phone, req.body.social, req.body.zip, 1, req.body.demo_link], function (error) {
-                    if (error) {
-                        console.log(JSON.stringify(error))
-                        res.write(JSON.stringify(error));
-                        res.end();
-                    } else {
-                        res.redirect('/login');
-                    }
-                });
-        } catch {
-            res.redirect('/sign_up')
+            convertZip(res, req.body.zip, client, context, complete);
+
+            function complete(){
+                callbackCount ++;
+                if (callbackCount >= 1) {
+                    mysql.pool.query("INSERT INTO Users(instrument_id, proficiency_id, email, password, fname, lname," +
+                    "phone, social, zip, lat, lng, lfg, demo_link) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?);",
+                    [req.body.insName, req.body.proficiency, req.body.email, hashedPassword, req.body.fname,
+                    req.body.lname, req.body.phone, req.body.social, req.body.zip, context.lat, context.lng, 1, req.body.demo_link], function (error) {
+                        if (error) {
+                            console.log(JSON.stringify(error));
+                            res.write(JSON.stringify(error));
+                            res.end();
+                        } else {
+                            res.redirect('/login');
+                        }
+                    });
+                }
+            }
+        }                 
+        catch {
+            res.redirect('/sign_up');
         }
     });
 
