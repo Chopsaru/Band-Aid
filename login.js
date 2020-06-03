@@ -23,10 +23,6 @@ module.exports = function () {
 
   // login verification and session set up
   router.post('/', function (req, res) {
-    //console.log(req.session)
-    //console.log(req.body);
-    //console.log(req.body.email)
-    //console.log(req.body.password)
 
     var mysql = req.app.get('mysql')
     var inserts = [req.body.email]
@@ -40,9 +36,6 @@ module.exports = function () {
       var dbPass = results[0].dbPassword
       var id = results[0].id
       var dbEmail = results[0].dbEmail
-      console.log(dbPass)
-      console.log(dbEmail)
-      console.log(id)
 
       // secure login
       const passwordMatched = await bcrypt.compare(req.body.password, dbPass, function (err, isMatch) {
@@ -51,9 +44,7 @@ module.exports = function () {
         } else if (!isMatch) {
           res.redirect('/bad_login')
         } else {
-          console.log('Password Matches!')
           if (req.body.email === dbEmail) {
-            console.log('made it to password check')
             req.session.userId = id
             return res.redirect('/user_profile/' + req.session.userId)
           } else {

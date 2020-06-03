@@ -42,12 +42,8 @@ module.exports = function(){
         })
         .then((r) => {
           if (r.data.status === Status.OK) {
-            console.log("Google Geocoding:");  
-            console.log("Lat: ", context.lat, "Long: ", context.lng);
             context.lat = r.data.results[0].geometry.location.lat;
             context.lng = r.data.results[0].geometry.location.lng;
-            console.log(r.data.results[0]);
-            console.log("Lat: ", context.lat, "Long: ", context.lng);
           } else {
             console.log(r.data.error_message);
             console.log("Geocoding Error!");
@@ -78,7 +74,6 @@ module.exports = function(){
 
     //show sign up page
     router.get('/', redirectUser_Profile, function(req,res) {
-        console.log(req.session.userId);
         var callbackCount = 0;
         var context = {};
         context.jsscripts = ["create_profile.js"];
@@ -99,8 +94,6 @@ module.exports = function(){
 
     // create profile
     router.post('/', async(req, res) => {
-        //console.log("Made to sign up post");
-        //console.log(req.body);
         try {
             // hash password for security
             const hashedPassword = await bcrypt.hash(req.body.password, 10);

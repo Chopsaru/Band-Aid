@@ -23,7 +23,6 @@ module.exports = function(){
                 res.end();
             }
             context.proficiency = results;
-            console.log(results);
             complete();
         });
     }
