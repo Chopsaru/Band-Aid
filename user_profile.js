@@ -277,7 +277,7 @@ module.exports = (function () {
                                              VALUES ("? ? has accepted your invitation!",\
                                              "Here is their contact information: Phone - ? Social - ?",\
                                              ?, ?, 0);',
-                        [mresults.fname, mresults.lname, mresults.phone, mresults.social, mresults.sender_id, mresults.inbox_id],
+                        [mresults.fname, mresults.lname, mresults.phone, mresults.social,  mresults.inbox_id, mresults.sender_id],
                         function (error) {
                             if (error) {
                                 console.log(error);
