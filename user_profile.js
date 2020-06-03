@@ -51,7 +51,7 @@ module.exports = (function () {
 
     function getMessages(res, mysql, context, id, complete) {
 
-        var sql = "SELECT * from Messages WHERE req_response = 1 AND inbox_id = ?";
+        var sql = "SELECT * from Messages WHERE inbox_id = ?";
         var inserts = [id];
         // Query and store results------------------------------------------------------
         mysql.pool.query(sql, inserts, function (error, results) {
@@ -255,14 +255,14 @@ module.exports = (function () {
  //--------------------------------------------- respond to messages ---------------------------------------------------
     router.post('/accept', (req, res) => {
         let emp = req.body;
-
+      
         var callbackCount = 0;
         var mysql = req.app.get('mysql');
 
         //get query params
         mysql.pool.query("SELECT inbox_id, sender_id, fname, lname, phone, social FROM Messages\
                                 INNER JOIN Users\
-                                ON Users.user_id = Messages.sender_id\
+                                ON Users.user_id = Messages.inbox_id\
                                 WHERE msg_id = ?;",
             [emp.msg_id],
             function (error, results) {
@@ -277,7 +277,7 @@ module.exports = (function () {
                                              VALUES ("? ? has accepted your invitation!",\
                                              "Here is their contact information: Phone - ? Social - ?",\
                                              ?, ?, 0);',
-                        [mresults.fname, mresults.lname, mresults.phone, mresults.social,  mresults.inbox_id, mresults.sender_id],
+                        [mresults.fname, mresults.lname, mresults.phone, mresults.social, mresults.sender_id, mresults.inbox_id],
                         function (error) {
                             if (error) {
                                 console.log(error);
@@ -318,7 +318,7 @@ module.exports = (function () {
         //get query params
         mysql.pool.query("SELECT inbox_id, sender_id, fname, lname FROM Messages\
                                 INNER JOIN Users\
-                                ON Users.user_id = Messages.sender_id\
+                                ON Users.user_id = Messages.inbox_id\
                                 WHERE msg_id = ?;",
             [emp.msg_id],
             function (error, results) {
