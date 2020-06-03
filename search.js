@@ -27,15 +27,10 @@ module.exports = function () {
             })
             .then((r) => {
                 if (r.data.status === Status.OK) {
-                    console.log('Google Geocoding:')
-                    console.log('Lat: ', context.lat, 'Long: ', context.lng)
                     context.lat = r.data.results[0].geometry.location.lat
                     context.lng = r.data.results[0].geometry.location.lng
-                    console.log(r.data.results[0])
-                    console.log('Lat: ', context.lat, 'Long: ', context.lng)
                 } else {
                     console.log(r.data.error_message)
-                    console.log('Geocoding Error!')
                 }
                 complete()
             })
@@ -62,33 +57,17 @@ module.exports = function () {
     LEFT JOIN Proficiencies ON U.proficiency_id = Proficiencies.proficiency_id \
     WHERE lfg = 1 \
     AND Proficiencies.proficiency_id >= ? \
-    AND Instruments.name = ?; \
+    AND Instruments.name = ? \
+    AND U.user_id != ?; \
     '
-        inserts = [context.lat || 0, context.lng || 0, context.lat || 0, context.distance || 1000, context.proficiency, context.instrument]
+        inserts = [context.lat || 0, context.lng || 0, context.lat || 0, context.distance || 1000, context.proficiency, context.instrument, req.params.uid]
 
         // Query and store results------------------------------------------------------
-        console.log('"\n' +
-            '    SELECT U.user_id, \n' +
-            '      U.fname, \n' +
-            '      U.lname, \n' +
-            '      U.demo_link, \n' +
-            '      U.zip, \n' +
-            '      Instruments.name, \n' +
-            '      Proficiencies.level \n' +
-            '    FROM    (SELECT *, (3959 * acos(cos(radians(' + context.lat + ')) * cos(radians(Users.lat)) * cos(radians(Users.lng) - radians(' + context.lng + ')) + \n' +
-            '      sin(radians(' + context.lat + ')) * sin(radians(Users.lat)))) AS distance FROM Users HAVING distance < ' + context.distance + ') U \n' +
-            '    LEFT JOIN Instruments ON U.instrument_id = Instruments.instrument_id \n' +
-            '    LEFT JOIN Proficiencies ON U.proficiency_id = Proficiencies.proficiency_id \n' +
-            '    WHERE lfg = 1 \n' +
-            '    AND Proficiencies.proficiency_id >= ' + context.proficiency + ' \n' +
-            '    AND Instruments.name = ' + context.instrument + '; \n' +
-            '    "')
         mysql.pool.query(sql, inserts, function (error, results) {
             if (error) {
                 res.write(JSON.stringify(error))
                 res.end()
             } else {
-                console.log(results)
                 context.matches = results
                 complete()
             }
@@ -103,7 +82,6 @@ module.exports = function () {
                 res.write(JSON.stringify(error))
                 res.end()
             } else {
-                console.log(results)
                 context.names = results[0]
                 complete()
             }
@@ -147,7 +125,6 @@ module.exports = function () {
 
     router.post('/:uid', async (req, res) => {
         let emp = req.body
-        console.log(emp)
         var mysql = req.app.get('mysql')
         try {
             uid = req.params.uid

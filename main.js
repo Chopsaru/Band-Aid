@@ -79,6 +79,5 @@ app.use(function (err, req, res, next) {
 
 // node start up
 app.listen(app.get('port'), function () {
-  console.log(ip.address())
   console.log(`Express started on http://${ip.address()}:5000/` + '; press Ctrl-C to terminate.')
 })
