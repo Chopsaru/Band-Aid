@@ -103,6 +103,7 @@ module.exports = function(){
             let callbackCount = 0;
 
             convertZip(res, req.body.zip, client, context, complete);
+            let lfg = req.body.lfg==='on'?1:0;
 
             function complete(){
                 callbackCount ++;
@@ -110,7 +111,7 @@ module.exports = function(){
                     mysql.pool.query("INSERT INTO Users(instrument_id, proficiency_id, email, password, fname, lname," +
                     "phone, social, zip, lat, lng, lfg, demo_link) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?);",
                     [req.body.insName, req.body.proficiency, req.body.email, hashedPassword, req.body.fname,
-                    req.body.lname, req.body.phone, req.body.social, req.body.zip, context.lat, context.lng, 1, req.body.demo_link], function (error) {
+                    req.body.lname, req.body.phone, req.body.social, req.body.zip, context.lat, context.lng, lfg, req.body.demo_link], function (error) {
                         if (error) {
                             console.log(JSON.stringify(error));
                             res.write(JSON.stringify(error));
