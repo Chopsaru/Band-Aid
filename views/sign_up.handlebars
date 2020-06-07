@@ -1,12 +1,12 @@
-<link rel="stylesheet" href = "/css/index.css">
+<link rel="stylesheet" href="/css/index.css">
 <title>Sign up for Band Aid</title>
-    <!--------------------------------------------------- Sign Up --------------------------------------------------------->
+<!--------------------------------------------------- Sign Up --------------------------------------------------------->
 <div class="bg">
     <br /><br />
     <div class="container forms.container">
         <div class="col-md-6 mx-auto shadow-border form-bg">
             <h1>Create Band Aid Account</h1>
-                <form id="create_user_profile" action="/sign_up" method="post">
+            <form id="create_user_profile" action="/sign_up" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>First Name:</label>
@@ -28,7 +28,7 @@
                         <label>Instrument</label>
                         <select name="insName" class="form-control">
                             {{#each instruments}}
-                                <option value="{{id}}">{{insName}}</option>
+                            <option value="{{id}}">{{insName}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -36,22 +36,38 @@
                         <label>Skill Level</label>
                         <select name="proficiency" class="form-control">
                             {{#each proficiencies}}
-                                <option value="{{id}}">{{insProficiency}}</option>
+                            <option value="{{id}}">{{insProficiency}}</option>
                             {{/each}}
                         </select>
                     </div>
                 </div>
                 <label>Social Media:</label>
-                <input type="url" class="form-control" name="social" placeholder="www.yourSocialMedia.com">
+                <input type="url" class="form-control" name="social" placeholder="http://www.yourSocialMedia.com">
                 <label>Demo Link:</label>
-                <input type="url" class="form-control" name="demo_link" placeholder="www.yourDemo.com">
-                <input type="checkbox"> Are you looking to join a band?</br>
+                <input type="url" class="form-control" name="demo_link" placeholder="http://www.yourDemo.com">
+                {{!-- <input type="checkbox" class="form-control" name="lfg"> Are you looking to join a band?</input> --}}
+
+                <div class="form-row">
+                <input type="checkbox" class="form-check-input" id="lfg" name="lfg">
+                <label class="form-check-label" for="lfg">Are you looking to join a band?</label>
+                </div>
+
                 <label>Password:</label>
                 <input type="password" class="form-control" name="password" required>
             </form>
             </br>
             <button class="btn btn-block g-button" onclick="createProfile()">Create Profile</button>
-           </br>
+        </div>
+        <div class="col-md-4 mx-auto">
+        <div class="toast" data-autohide="false">
+            <div class="toast-header">
+                <strong class="mr-auto text-danger">Error</strong>
+                <button type="button" class="ml-3 mb-1 close" data-dismiss="toast">&times;</button>
+            </div>
+            <div class="toast-body" id="toast-content">
+                Some text inside the toast body
+            </div>
+        </div>
         </div>
     </div>
 </div>
