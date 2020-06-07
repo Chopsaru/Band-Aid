@@ -1,21 +1,21 @@
-PROMPT
-BandAid
+# BandAid
 Musician Finder: Find that musician, be it a drummer/guitarist/singer, 
 to fill the missing piece in your band. (Can have various filter criteria 
-such as skill, location, etc.) Customer: Raghuram
+such as skill, location, etc.) 
+Customer: Raghuram
 ---
 
 
 
-# Overview
+## Overview
 
 Band Aid is a matchmaker service that allows for musicians to find other musicians with complementary skills and facilitate contact between the two parties. Users may create an account, edit their profile, search for other musicians, invite musicians to join their band, and respond to invitations from other musicians.
 
-# Hosting Instructions
+## Hosting Instructions
 
 To host the site locally, run main.js using node from your web server of choice. By default, hosting will start on port 5000. Alternatively, you can visit the site at this local IP: [http://3.80.207.19:5000/](http://3.80.207.19:5000/)
 
-# File Structure
+## File Structure
 
    Root - contains node.js routing files separated by page, startup file, sql files, and dbcon
     
@@ -49,7 +49,7 @@ Quality Attributes
 -   Efficiency
     
 
-# Design Patterns
+## Design Patterns
 
 Each page of  Band Aid’s site functionality adheres to a facade design pattern by abstracting a sequence of SQL queries to a MySQL database - fetching user info, musician info, and messages- to achieve a seamless user interface. For example, the UML sequence diagram for loading a user profile page would look like this:
 **
@@ -58,7 +58,7 @@ In this example, the User Profile UI is the facade interface for all functions t
 
   
 
-# Architecture / Design
+## Architecture / Design
 
 Band Aid operates on a three-tier monolithic software architecture comprising an authorization layer, presentation layer, and application integration layer labeled below in the figure below as “EC2 Instance”. This refers to a AWS EC2 instance running Ubuntu 18.04 LTS that is acting as our web server, and application server. This EC2 is running Node as its hosting environment and we are leveraging express as the framework.
 
@@ -91,7 +91,7 @@ New User browses to Band Aid’s home page, where they are greeted with a login 
 
   
 
-# Current State
+## Current State
 
 It it's current state, Band Aid is a fully functional product prototype that meets all functional and non-functional requirements given by our client.
 
@@ -106,7 +106,7 @@ Remaining Product Backlog:
  - BA006 As a MUSICIAN LOOKING FOR A BAND/WORK, I want to see information of any band that is interested in me so that I have can make an informed decision to accept or decline their invitation. (Out of scope)
 
 
-# Future Contributors
+## Future Contributors
 
 If you are interested in contributing to Band Aid, please reach out to Nathan Johnson at johnsna7@oregonstate.edu or submit a pull request to [github.com/Chopsaru/Band-Aid](https://github.com/Chopsaru/Band-Aid).
 
