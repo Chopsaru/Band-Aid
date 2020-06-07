@@ -42,20 +42,32 @@
                     </div>
                 </div>
                 <label>Social Media:</label>
-                <input type="url" class="form-control" name="social" placeholder="www.yourSocialMedia.com">
+                <input type="url" class="form-control" name="social" placeholder="http://www.yourSocialMedia.com">
                 <label>Demo Link:</label>
-                <input type="url" class="form-control" name="demo_link" placeholder="www.yourDemo.com">
+                <input type="url" class="form-control" name="demo_link" placeholder="http://www.yourDemo.com">
                 {{!-- <input type="checkbox" class="form-control" name="lfg"> Are you looking to join a band?</input> --}}
-    
-    <input type="checkbox" class="form-check-input" id="lfg" name="lfg">
-    <label class="form-check-label" for="lfg">Are you looking to join a band?</label>
+
+                <div class="form-row">
+                <input type="checkbox" class="form-check-input" id="lfg" name="lfg">
+                <label class="form-check-label" for="lfg">Are you looking to join a band?</label>
+                </div>
 
                 <label>Password:</label>
                 <input type="password" class="form-control" name="password" required>
             </form>
             </br>
             <button class="btn btn-block g-button" onclick="createProfile()">Create Profile</button>
-            </br>
+        </div>
+        <div class="col-md-4 mx-auto">
+        <div class="toast" data-autohide="false">
+            <div class="toast-header">
+                <strong class="mr-auto text-danger">Error</strong>
+                <button type="button" class="ml-3 mb-1 close" data-dismiss="toast">&times;</button>
+            </div>
+            <div class="toast-body" id="toast-content">
+                Some text inside the toast body
+            </div>
+        </div>
         </div>
     </div>
 </div>

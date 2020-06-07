@@ -20,7 +20,8 @@
     "formidable": "^1.2.2",
     "ip": "^1.1.5",
     "mysql": "^2.8.0",
-    "node-cache": "^5.1.0"
+    "node-cache": "^5.1.0",
+    "valid-url": "^1.0.9"
   },
   "devDependencies": {
     "nodemon": "^2.0.3",

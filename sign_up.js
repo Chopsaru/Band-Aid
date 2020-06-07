@@ -2,6 +2,7 @@ module.exports = function(){
     var express = require('express');
     var router = express.Router();
     const bcrypt = require('bcrypt')
+    const validUrl = require('valid-url');
     const {Client, Status} = require("@googlemaps/google-maps-services-js");
     var geoKey = "AIzaSyBv5zGSLMMofgJgzdnNkaL7yiGlDh3NuBM";
 
@@ -102,6 +103,15 @@ module.exports = function(){
             let context = {};
             let callbackCount = 0;
 
+            // validate the url for demo and social            
+            if(req.body.demo_link!=='' && !validUrl.isUri(req.body.demo_link)) {
+                throw new Error(`Invalid demo link: "${req.body.demo_link}".`);
+            }
+
+            if(req.body.social!=='' &&!validUrl.isUri(req.body.social)) {
+                throw new Error(`Invalid social link: "${req.body.social}".`);
+            }            
+
             convertZip(res, req.body.zip, client, context, complete);
             let lfg = req.body.lfg==='on'?1:0;
 
@@ -123,8 +133,14 @@ module.exports = function(){
                 }
             }
         }                 
-        catch {
-            res.redirect('/sign_up');
+        catch (err) {
+            console.log('Error! '+ err + ' Redirecting to sign up page')
+            res.status(500).send({
+                error: {
+                    status: 500,
+                    message: `${err}`
+                }
+            });
         }
     });
 
