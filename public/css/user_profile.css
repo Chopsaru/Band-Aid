@@ -34,6 +34,7 @@ body{
     background: #212529b8;
 }
 .profile-img .file input {
+    
     position: absolute;
     opacity: 0;
     right: 0;
@@ -106,11 +107,23 @@ body{
     font-weight: 600;
     color: #0062cc;
 }
+.social_link:hover{
+    color:lightskyblue;
+}
+#upload_pic {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+.hide_button{
+    display: none;
+}
 
 /*Inbox Section*/
 .inbox_body {
     
-    margin-top: -150px;
+    margin-bottom: auto;
+    
 }
 
 .inbox_button {

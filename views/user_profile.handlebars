@@ -19,15 +19,20 @@
                       action="/user_profile/edit/profile_image/{{user_profile.id}}"
                       method="post"
                       enctype="multipart/form-data">
-
-                    <input class="btn btn-primary"
+                    <label class="btn btn-primary" for="upload_pic">Change Profile Pic</label>
+                    <input id="upload_pic"
                            type="file" id="theImageField"
                            accept="image/png, image/jpeg"
                            name="image">
 
                     <!--                        <p id="errorMessage" class="hide"></p>-->
                     <!--                        <p id="successMessage" class="hide"></p>-->
-                    <input class="btn btn-primary" type="submit" value="upload">
+                    <input class="hide_button" type="submit" name="notbutton" value="upload">
+                    <script>
+                            document.querySelector('input[type=file]').addEventListener('change', function () {
+                            this.form.submit();
+                            });
+                    </script>
 
                     <!--                        <a href="" id="clearImage">Clear</a>-->
                 </form>
@@ -67,9 +72,9 @@
         <div class="col-md-4">
             <div class="profile-work">
                 <p>Social Media</p>
-                <a href="{{user_profile.social}}" target="_blank">{{user_profile.social}}</a><br/>
+                <a class="social_link" href="{{user_profile.social}}" target="_blank">{{user_profile.social}}</a><br/>
                 <p>Music Sample</p>
-                <a href="{{user_profile.demo_link}}" target="_blank">{{user_profile.demo_link}}</a><br/>
+                <a class="social_link" href="{{user_profile.demo_link}}" target="_blank">{{user_profile.demo_link}}</a><br/>
             </div>
         </div>
         <div class="col-md-8">
