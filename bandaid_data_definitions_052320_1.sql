@@ -104,16 +104,16 @@ INSERT INTO Users (email, password, fname, lname, phone, zip, lat, lng, lfg, soc
 VALUES ('user1@gmail.com', '$2b$10$QQxAR4KcUwU9mk8vG2uiTOTchNRo4.u2Ct8pF2fEW1k96t2UEa2re', 'Bob', 'Jones', '123456789','60523', '41.831793', '-87.94328370000001', 1, 'https://www.facebook.com/', 'https://soundcloud.com/', 2, 1);
 
 INSERT INTO Users (email, password, fname, lname, phone, zip, lat, lng, lfg, social, demo_link, proficiency_id, instrument_id)
-VALUES ('user2@gmail.com', '$2b$10$0jPvzJlIr4lo2XOaPODxm.kvLDjnO/dc/0RCvim0qvEu2/IwhKFK2', 'Dave', 'Jones', '123456789','99999', '44.831793', '-83.94328370000001', 1, 'https://www.facebook.com/', 'https://soundcloud.com/', 2, 1);
+VALUES ('user2@gmail.com', '$2b$10$0jPvzJlIr4lo2XOaPODxm.kvLDjnO/dc/0RCvim0qvEu2/IwhKFK2', 'Dave', 'Jones', '123456789','60564', '41.7074', '-88.2014', 1, 'https://www.facebook.com/', 'https://soundcloud.com/', 2, 1);
 
 INSERT INTO Users (email, password, fname, lname, phone, zip, lat, lng, lfg, social, demo_link, proficiency_id, instrument_id)
-VALUES ('user3@gmail.com', '$2b$10$rZpvonyqttD9mYfx.Gj/.OvW46lo0/Ydy1VMDnXEx5VbwiWtsiTZS', 'Betty', 'Bop', '123456789','11111', '43.831793', '-82.94328370000001', 0, 'https://www.facebook.com/', 'https://soundcloud.com/', 4, 1);
+VALUES ('user3@gmail.com', '$2b$10$rZpvonyqttD9mYfx.Gj/.OvW46lo0/Ydy1VMDnXEx5VbwiWtsiTZS', 'Betty', 'Bop', '123456789','53205', '43.053', '-87.9328', 0, 'https://www.facebook.com/', 'https://soundcloud.com/', 4, 1);
 
 INSERT INTO Users (email, password, fname, lname, phone, zip, lat, lng, lfg, social, demo_link, proficiency_id, instrument_id)
-VALUES ('user4@gmail.com', '$2b$10$um5J7b2GWVXtgK85iX5B3.GMVCsi5CMTo6NzLYYXgMIzGAeTevkxG', 'Mike', 'Mustache', '123456789','60523', '42.831793', '-89.94328370000001', 1, 'https://www.facebook.com/', 'https://soundcloud.com/', 3, 3);
+VALUES ('user4@gmail.com', '$2b$10$um5J7b2GWVXtgK85iX5B3.GMVCsi5CMTo6NzLYYXgMIzGAeTevkxG', 'Mike', 'Mustache', '123456789','49505', '42.9971', '-85.6411', 1, 'https://www.facebook.com/', 'https://soundcloud.com/', 3, 3);
 
 INSERT INTO Users (email, password, fname, lname, phone, zip, lat, lng, lfg, social, demo_link, proficiency_id, instrument_id)
-VALUES ('user5@gmail.com', '$2b$10$89m9BrxckILExfUhtzJCeutOO2JALvUWUje4jDKe/A6v9jcD3za16', 'Sally', 'Sandal', '123456789','99999', '45.831793', '-88.94328370000001', 1, 'https://www.facebook.com/', 'https://soundcloud.com/', 5, 4);
+VALUES ('user5@gmail.com', '$2b$10$89m9BrxckILExfUhtzJCeutOO2JALvUWUje4jDKe/A6v9jcD3za16', 'Sally', 'Sandal', '123456789','46404', '41.5872', '-87.3729', 1, 'https://www.facebook.com/', 'https://soundcloud.com/', 5, 4);
 
 
 INSERT INTO Messages (header, body, req_response, sender_id, read_bool, inbox_id)
